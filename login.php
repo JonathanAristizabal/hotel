@@ -56,11 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="post">
             <div class="form-group">
                 <label for="documento">Usuario:</label>
-                <input type="text" id="documento" name="documento" required>
+                <input type="text" id="documento" name="documento" required placeholder="Ingresa tu documento">
             </div>
             <div class="form-group">
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <input type="password" id="contrasena" name="contrasena" required placeholder="Ingresa tu contraseña">
             </div>
             <br>
             <div class="form-group">

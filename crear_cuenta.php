@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($conn->query($sql) === true) {
                 echo '<script>
                         alert("Registro exitoso. Serás redirigido a la página de inicio de sesión.");
-                        window.location.href = "panel_gestor.php"; // Cambia "panel_gestor.php" por la URL a la que deseas redirigir.
+                        window.location.href = "login.php"; // Cambia "login.php" por la URL a la que deseas redirigir.
                      </script>';
             } else {
                 echo '<script>
