@@ -1,0 +1,176 @@
+/* Estilos para la barra de navegación principal */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav.navegacion {
+    color: #fff;
+    padding: 10px;
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+nav ul li a:hover{
+    color: #27ae60;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    font-size: 16px;
+    padding: 0px 0px 0px 10px;
+    text-align: center;
+    margin-bottom: 10px; /* Espaciado vertical entre los enlaces */
+    width: 140px; /* Ancho fijo para todos los elementos de la lista */
+    display: inline-block; /* Hace que los elementos estén en línea y no se apilen */
+}
+
+/* Estilos para los elementos de la lista comunes */
+nav ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 0px 8px 0px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease; /* Efecto de transición */
+    color: #ffffff;
+}
+
+/* Estilo para otros elementos de la lista (Facturación, Habitaciones, Huéspedes, Pedidos, Usuarios) */
+li.facturacion-item a,
+li.habitaciones-item a,
+li.huespedes-item a,
+li.pedidos-item a,
+li.usuarios-item a {
+    background-color: #34495e;
+    color: #ffffff;
+    
+}
+
+nav ul li a:hover{
+    color: #95a5a6;
+    
+}
+
+
+/* Estilo para el botón "Consultar y configuracion" */
+li.consultar-item  a, li.configuracion-item  a {
+    background-color: #6a6b6b;
+    color: #ffffff 
+}
+
+/* Estilo para el botón "Consultar y configuracion" */
+li.consultar-item  a:hover, li.configuracion-item  a:hover {
+    background-color: #34495e;
+    color: #95a5a6;
+    transform: scale(1.05); /* Escala el servicio al 105% al hacer hover */ 
+}
+
+
+
+
+
+li.facturacion-item a:hover,
+li.habitaciones-item a:hover,
+li.huespedes-item a:hover,
+li.pedidos-item a:hover,
+li.usuarios-item a:hover {
+    transform: scale(1.05); /* Escala el servicio al 105% al hacer hover */
+}
+
+/* Estilos para el menú de navegación */
+nav.panel {
+    padding: 30px 10px 10px 10px;
+    width: 200px;
+    position: fixed; /* Para que la barra de navegación sea fija en la página */
+    height: 100%; /* Ocupa toda la altura del viewport */
+}
+
+/* Estilos para los módulos */
+main {
+    margin-left: 220px; /* Deja espacio para la barra de navegación */
+    padding: 10px 80px 10px 80px;
+}
+
+.modulo {
+    background-color: #f4f4f4;
+    margin: 20px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #ccc;
+    flex: 1;
+    width: calc(100% - 40px); /* Ajusta el ancho de los módulos */
+    text-align: center;
+}
+
+.modulo-header {
+    background-color: #555;
+    color: #fff;
+    padding: 5px;
+}
+
+.modulo-content {
+    padding: 10px;
+}
+
+/* Estilos para los botones de crear, Modificar y Eliminar */
+.crear-button,
+.modificar-button,
+.eliminar-button {
+    background-color: #555;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    display: inline-block; /* Cambia a "inline-block" para que los botones estén en línea */
+    margin-right: 10px; /* Espaciado derecho entre los botones */
+}
+
+.crear-button:hover,
+.modificar-button:hover,
+.eliminar-button:hover {
+    background-color: #34495e; /* Cambia el color al pasar el mouse */
+}
+
+/* Boton consultar */
+
+button {
+    background-color: #555;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    display: block; /* Hace que el botón sea un bloque en lugar de en línea */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+}
+
+button:hover {
+    background-color: #34495e; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #34495e;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    clear: both;
+    position: fixed; /* Fija el pie de página en la parte inferior */
+    bottom: 0; /* Lo coloca en la parte inferior de la ventana */
+    width: 100%; /* Ocupa todo el ancho de la ventana */
+}
