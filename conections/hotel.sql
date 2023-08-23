@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-08-2023 a las 04:27:09
+-- Tiempo de generación: 23-08-2023 a las 20:02:37
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `facturaciones` (
-  `cedula` int(11) NOT NULL,
+  `documento` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `valor` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -66,7 +66,7 @@ INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_di
 --
 
 CREATE TABLE `huespedes` (
-  `cedula` int(11) NOT NULL,
+  `documento` int(11) NOT NULL,
   `ticket` int(11) NOT NULL,
   `dias_reservados` int(11) NOT NULL,
   `habitacion` int(11) NOT NULL
@@ -79,7 +79,7 @@ CREATE TABLE `huespedes` (
 --
 
 CREATE TABLE `pedidos` (
-  `cedula` int(11) NOT NULL,
+  `documento` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
   `habitacion` int(11) NOT NULL
@@ -101,8 +101,8 @@ CREATE TABLE `tipousuarios` (
 --
 
 INSERT INTO `tipousuarios` (`id`, `tipo`) VALUES
-(0, 'administrador'),
-(1, 'cliente');
+(0, 'cliente'),
+(1, 'administrador');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,8 @@ INSERT INTO `tipousuarios` (`id`, `tipo`) VALUES
 --
 
 CREATE TABLE `usuarios` (
-  `cedula` int(11) NOT NULL,
+  `documento` int(11) NOT NULL,
+  `correo` varchar(45) NOT NULL,
   `nombre` varchar(15) NOT NULL,
   `apellido` varchar(15) NOT NULL,
   `telefono` varchar(20) NOT NULL,
@@ -126,11 +127,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`cedula`, `nombre`, `apellido`, `telefono`, `pais`, `departamento`, `ciudad`, `contrasena`, `tipoUsuarioId`) VALUES
-(0, '', '', '', '', '', '', '$2y$10$/9y1/YZ0Tap0I7OHHqrKUOkSvInTeIcv0qILFPKXRJUZcspj0BZ.2', 1),
-(30281508, 'Flor', 'Tapia', '3058145692', 'Colombia', 'Caldas', 'Villamaria', '$2y$10$UQOpbCWwZHmigU7uRsLNpeNcWEsJTIFAmbIirA2vC6.TkXRuhxS.K', 1),
-(1002633713, 'Willy Jhoan', 'Pinto', '123456789', 'Ecuador', 'Caldas', 'Manizales', '$2y$10$MIzfge6kpToXDSpRuz3F/e3x.6yxmkJKBp3s/tvtclE8BbMU5iXIW', 1),
-(1053872476, 'Jeimy Tatiana', 'Tapia', '+573058122481', 'Colombia', 'Caldas', 'Villamaria', '$2y$10$CEzkpHMfEM4gHIIAQ1J35.yIcLYheSMl8Ew7hBJ2Hc/arpG27gayK', 0);
+INSERT INTO `usuarios` (`documento`, `correo`, `nombre`, `apellido`, `telefono`, `pais`, `departamento`, `ciudad`, `contrasena`, `tipoUsuarioId`) VALUES
+(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', 'Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 0),
+(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy', 'Pinto', '3058122481', 'Colombia', 'Caldas', 'Manizales', '$2y$10$NnuvT.hwhIpTkbC419xeDOHNtZN/Gpu4j/KhyfCO2OKxXYjF846D6', 0);
 
 --
 -- Índices para tablas volcadas
@@ -140,7 +139,7 @@ INSERT INTO `usuarios` (`cedula`, `nombre`, `apellido`, `telefono`, `pais`, `dep
 -- Indices de la tabla `facturaciones`
 --
 ALTER TABLE `facturaciones`
-  ADD KEY `fk_facturaciones_huespedes` (`cedula`);
+  ADD KEY `fk_facturaciones_huespedes` (`documento`);
 
 --
 -- Indices de la tabla `habitaciones`
@@ -152,7 +151,7 @@ ALTER TABLE `habitaciones`
 -- Indices de la tabla `huespedes`
 --
 ALTER TABLE `huespedes`
-  ADD KEY `cedula` (`cedula`),
+  ADD KEY `cedula` (`documento`),
   ADD KEY `fk_huespedes_habitaciones` (`habitacion`);
 
 --
@@ -160,7 +159,7 @@ ALTER TABLE `huespedes`
 --
 ALTER TABLE `pedidos`
   ADD KEY `fk_pedidos_habitaciones` (`habitacion`),
-  ADD KEY `cedula` (`cedula`);
+  ADD KEY `cedula` (`documento`);
 
 --
 -- Indices de la tabla `tipousuarios`
@@ -172,8 +171,8 @@ ALTER TABLE `tipousuarios`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`cedula`),
-  ADD KEY `fk_usuarios_tipoUsuarios` (`tipoUsuarioId`);
+  ADD PRIMARY KEY (`documento`),
+  ADD KEY `tipoUsuarioId` (`tipoUsuarioId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -193,21 +192,21 @@ ALTER TABLE `tipousuarios`
 -- Filtros para la tabla `facturaciones`
 --
 ALTER TABLE `facturaciones`
-  ADD CONSTRAINT `fk_facturaciones_huespedes` FOREIGN KEY (`cedula`) REFERENCES `huespedes` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_facturaciones_huespedes` FOREIGN KEY (`documento`) REFERENCES `huespedes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `huespedes`
 --
 ALTER TABLE `huespedes`
   ADD CONSTRAINT `fk_huespedes_habitaciones` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_huespedes_usuarios` FOREIGN KEY (`cedula`) REFERENCES `usuarios` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_huespedes_usuarios` FOREIGN KEY (`documento`) REFERENCES `usuarios` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `fk_pedidos_habitaciones` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pedidos_huespedes` FOREIGN KEY (`cedula`) REFERENCES `huespedes` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pedidos_huespedes` FOREIGN KEY (`documento`) REFERENCES `huespedes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
