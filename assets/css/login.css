@@ -1,0 +1,186 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #34495e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 10px 0px 15px 0px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+nav ul li :hover {
+    color: #999999;
+}
+
+
+main {
+    padding: 20px;
+}
+
+section form li a {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+section form li :hover {
+    color: #b4b4b4;
+}
+
+/* Estilos para el formulario de contacto */
+
+#formulario {
+    background-color: hsl(210, 29%, 29%);
+    /* Color de fondo */
+    padding: 50px 0px 50px 0px;
+    border-radius: 10px;
+    /* Bordes redondeados */
+    text-align: center;
+    /* Centra el contenido horizontalmente */
+    margin: 0 auto;
+    /* Centra el contenedor en la página */
+    max-width: 500px;
+    /* Define un ancho máximo para el contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Agrega una sombra */
+}
+
+#formulario h2 {
+    font-size: 22px;
+    color: #ffffff;
+    /* Color del título */
+    margin-bottom: 20px;
+    /* Espacio inferior */
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px; /* Cambié el valor de 600px a 16px */
+    color: #ffffff;
+    /* Color del texto de etiqueta */
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    text-align: center;
+    width: 70%;
+    padding: 5px;
+    margin-bottom: 10px;
+    /* Espacio inferior */
+    border: 1px solid #e0e0e0;
+    /* Borde ligero */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    /* Permite redimensionar verticalmente */
+}
+
+/* Estilos para los elementos ul dentro del formulario */
+#formulario ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    /* Para centrar los elementos ul */
+}
+
+#formulario ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+#formulario ul li a {
+    text-decoration: none;
+}
+
+/* Estilo para el botón de iniciar sesión */
+
+.form-group input[type="submit"] {
+    font-size: 14px;
+    background-color: #3a3a3a;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    padding: 5px 10px;
+    /* Espaciado interno del botón (ajústalo según tus preferencias) */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cambiar el cursor al pasar sobre el botón */
+}
+
+/* Estilo para cambiar el color del botón al pasar el cursor */
+
+.form-group input[type="submit"]:hover {
+    background-color: #5c5c5c;
+    /* Color de fondo del botón al pasar el cursor */
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #34495e;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    clear: both;
+    position: fixed;
+    /* Fija el pie de página en la parte inferior */
+    bottom: 0;
+    /* Lo coloca en la parte inferior de la ventana */
+    width: 100%;
+    /* Ocupa todo el ancho de la ventana */
+}
+
+#info-contacto {
+    margin-top: 10px;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.derechos-reservados {
+    font-size: 14px;
+    text-align: center;
+    padding: 5px 0;
+}
