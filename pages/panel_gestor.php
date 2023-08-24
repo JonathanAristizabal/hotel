@@ -1,9 +1,17 @@
 <?php
-include 'conections/conection.php';
+include '../conections/conection.php';
 
 // Consulta SQL para obtener los datos de la tabla 'usuarios'
-$sql = "SELECT * FROM usuarios";
-$result = $conn->query($sql);
+$sql_usuarios = "SELECT * FROM usuarios";
+$result_usuarios = $conn->query($sql_usuarios);
+
+// Consulta SQL para obtener los datos de la tabla 'facturaciones'
+$sql_facturaciones = "SELECT * FROM facturaciones";
+$result_facturaciones = $conn->query($sql_facturaciones);
+
+// Consulta SQL para obtener los datos de la tabla 'habitaciones'
+$sql_habitaciones = "SELECT * FROM habitaciones";
+$result_habitaciones = $conn->query($sql_habitaciones);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,15 +19,15 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/panel_gestor.css">
-    <title>panel_gestor</title>
+    <link rel="stylesheet" href="../assets/css/panel_gestor.css">
+    <title>Panel Gestor</title>
 </head>
 
 <body>
     <!-- encabezado -->
     <header>
         <div id="logo">
-            <img src="img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
+            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
         </div>
         <h1>Panel de gestión</h1>
         <nav class="navegacion">
@@ -72,35 +80,102 @@ $result = $conn->query($sql);
                 <table>
                     <thead>
                         <tr>
-                            <th>Cedula</th>
+                            <th>Documento</th>
                             <th>Descripción</th>
                             <th>Valor</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Aquí puedes agregar filas con datos de facturación -->
-                        <tr>
-                            <td>123456789</td>
-                            <td>Factura 1</td>
-                            <td>$100.00</td>
-                            <td>
-                                <button class="crear-button">crear</button>
-                                <button class="modificar-button">Modificar</button>
-                                <button class="eliminar-button">Eliminar</button>
-                            </td>
-                        </tr>
-                        <!-- Agrega más filas según sea necesario -->
+                        <?php
+                        if ($result_facturaciones->num_rows > 0) {
+                            while ($row = $result_facturaciones->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $row['documento'] . '</td>';
+                                echo '<td>' . $row['descripcion'] . '</td>';
+                                echo '<td>' . '$' . $row['valor'] . '</td>';
+                                echo '<td>';
+                                echo '<button class="crear-button">crear</button>';
+                                echo '<button class="modificar-button">Modificar</button>';
+                                echo '<button class="eliminar-button">Eliminar</button>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="4">No hay registros disponibles.</td></tr>';
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
         </section>
         <!-- Modulo de Habitaciones -->
         <section class="modulo" id="habitaciones">
+            <!-- 
+                Formulario para crear habitación
+             -->
+            <div id="modalCrearHabitacion" class="modal">
+                <div class="modal-content">
+                    <h2>Crear Nueva Habitación</h2>
+                    <form id="formularioCrearHabitacion" action="crear_habitacion.php" method="post">
+                        <label for="numero">Número:</label>
+                        <input type="number" id="numero" name="numero" required>
+
+                        <label for="tipo">Tipo:</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="Individual">Individual</option>
+                            <option value="Doble">Doble</option>
+                            <option value="Suite">Suite</option>
+                        </select>
+
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" id="descripcion" name="descripcion" required>
+
+                        <label for="valor_diario">Valor Diario:</label>
+                        <input type="number" id="valor_diario" name="valor_diario" required>
+
+                        <button type="submit">Crear Habitación</button>
+                    </form>
+                </div>
+            </div>
+
+            </div>
+            <button class="crear-button" id="btnCrearHabitacion">Crear nueva Habitación</button>
             <div class="modulo-header">Habitaciones</div>
             <div class="modulo-content">
-                <!-- Contenido del modulo de habitaciones... -->
-                <p>Contenido del módulo de habitaciones...</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Descripción</th>
+                            <th>Valor Diario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result_habitaciones->num_rows > 0) {
+                            while ($row_habitaciones = $result_habitaciones->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $row_habitaciones['numero'] . '</td>';
+                                echo '<td>' . $row_habitaciones['tipo'] . '</td>';
+                                echo '<td>' . ($row_habitaciones['estado'] == 1 ? 'Ocupada' : 'Disponible') . '</td>';
+                                echo '<td>' . $row_habitaciones['descripcion'] . '</td>';
+                                echo '<td>' . '$' . $row_habitaciones['valor_diario'] . '</td>';
+                                echo '<td>';
+                                echo '<button class="modificar-button"><a href="modificar_habitacion.php?numero=' . $row_habitaciones['numero'] . '">Modificar</a></button>';
+                                echo '<button class="eliminar-button"><a href="eliminar_habitacion.php?numero=' . $row_habitaciones['numero'] . '">Eliminar</a></button>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="6">No hay registros disponibles.</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -124,6 +199,7 @@ $result = $conn->query($sql);
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
+            <button class="crear-button">Crear nuevo Usuario</button>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
                 <table>
@@ -138,8 +214,8 @@ $result = $conn->query($sql);
                     </thead>
                     <tbody>
                         <?php
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        if ($result_usuarios->num_rows > 0) {
+                            while ($row = $result_usuarios->fetch_assoc()) {
                                 echo '<tr>';
                                 echo '<td>' . $row['documento'] . '</td>';
                                 echo '<td>' . $row['nombre'] . '</td>';
@@ -147,7 +223,6 @@ $result = $conn->query($sql);
                                 echo '<td>' . $row['correo'] . '</td>';
                                 echo '<td>' . $row['telefono'] . '</td>';
                                 echo '<td>';
-                                echo '<button class="crear-button">crear</button>';
                                 echo '<button class="modificar-button">Modificar</button>';
                                 echo '<button class="eliminar-button">Eliminar</button>';
                                 echo '</td>';
@@ -175,7 +250,7 @@ $result = $conn->query($sql);
     <footer>
         <p>&copy; 2023 Panel de Gestión. Todos los derechos reservados.</p>
     </footer>
-    <script src="js/panel.js"></script>
 </body>
+<script src="../assets/js/panel.js"></script>
 
 </html>
