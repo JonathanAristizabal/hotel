@@ -1,19 +1,19 @@
 <?php
 include '../conections/conection.php'; // Incluye tu archivo de conexión a la base de datos
 
-if (isset($_GET['documento'])) {
-    $documento = $_GET['documento'];
+if (isset($_GET['ticket'])) {
+    $ticket = $_GET['ticket'];
 
-    // Consulta SQL para obtener los datos del huésped
-    $sqlHuesped = "SELECT * FROM huespedes WHERE documento = '$documento'";
-    $resultHuesped = $conn->query($sqlHuesped);
+    // Consulta SQL para obtener los datos de la reserva
+    $sqlReserva = "SELECT * FROM huespedes WHERE ticket = '$ticket'";
+    $resultReserva = $conn->query($sqlReserva);
 
-    if ($resultHuesped->num_rows == 1) {
-        $rowHuesped = $resultHuesped->fetch_assoc();
-        $habitacion = $rowHuesped['habitacion'];
+    if ($resultReserva->num_rows == 1) {
+        $rowReserva = $resultReserva->fetch_assoc();
+        $habitacion = $rowReserva['habitacion'];
 
-        // Eliminar el registro del huésped en la tabla huespedes
-        $sqlEliminar = "DELETE FROM huespedes WHERE documento = '$documento'";
+        // Eliminar el registro de la reserva en la tabla huespedes
+        $sqlEliminar = "DELETE FROM huespedes WHERE ticket = '$ticket'";
         if ($conn->query($sqlEliminar) === true) {
             // Actualizar el estado de la habitación a disponible en la tabla habitaciones
             $sqlActualizarHabitacion = "UPDATE habitaciones SET estado = 0 WHERE numero = '$habitacion'";
@@ -26,14 +26,14 @@ if (isset($_GET['documento'])) {
                 echo "Error al actualizar el estado de la habitación: " . $conn->error;
             }
         } else {
-            echo "Error al eliminar la reserva del huésped: " . $conn->error;
+            echo "Error al eliminar la reserva: " . $conn->error;
         }
     } else {
-        echo "Huésped no encontrado.";
+        echo "Reserva no encontrada.";
         exit();
     }
 } else {
-    echo "Documento no proporcionado.";
+    echo "Ticket de reserva no proporcionado.";
     exit();
 }
 ?>

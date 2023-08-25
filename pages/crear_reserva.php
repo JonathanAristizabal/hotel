@@ -6,8 +6,9 @@ $sqlDocumentos = "SELECT documento FROM usuarios";
 $resultDocumentos = $conn->query($sqlDocumentos);
 
 // Obtener la lista de habitaciones disponibles
-$sqlHabitacionesDisponibles = "SELECT numero, tipo FROM habitaciones WHERE estado = 0";
+$sqlHabitacionesDisponibles = "SELECT numero, tipo, valor_diario FROM habitaciones WHERE estado = 0";
 $resultHabitacionesDisponibles = $conn->query($sqlHabitacionesDisponibles);
+
 
 // Cuando se envíe el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,14 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Generar un token aleatorio corto para el ticket
     $ticket = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6);
     // Calcular la cantidad de días reservados
-    $timestampLlegada = strtotime($diaLlegada);
-    $timestampSalida = strtotime($diaSalida);
-    $diferenciaSegundos = $timestampSalida - $timestampLlegada;
-    $diasReservados = ceil($diferenciaSegundos / (60 * 60 * 24)); // Convertir segundos a días y redondear hacia arriba
+    $fechaLlegada = new DateTime($diaLlegada);
+    $fechaSalida = new DateTime($diaSalida);
+    $intervalo = $fechaLlegada->diff($fechaSalida);
+    $diasReservados = $intervalo->days;
+
 
     // Consulta SQL para insertar la nueva reserva en la tabla huespedes
     $sqlInsertReserva = "INSERT INTO huespedes (documento, ticket, dias_reservados, habitacion)
-                         VALUES ('$documento', '$ticket', '$dias_reservados', '$habitacion')";
+                         VALUES ('$documento', '$ticket', '$diasReservados', '$habitacion')";
 
     if ($conn->query($sqlInsertReserva) === true) {
         // Actualizar estado de la habitación a ocupada (estado = 1)
@@ -60,13 +62,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Crear Nueva Reserva</h1>
     <form action="crear_reserva.php" method="POST">
         <label for="documento">Documento:</label>
-        <select id="documento" name="documento">
-            <!-- Opciones de documentos -->
+        <select id="documento" name="documento" required>
+            <?php
+            while ($rowDocumento = $resultDocumentos->fetch_assoc()) {
+                echo '<option value="' . $rowDocumento['documento'] . '">' . $rowDocumento['documento'] . '</option>';
+            }
+            ?>
         </select>
-
         <label for="habitacion">Habitación:</label>
         <div>
-            <!-- Radio buttons para seleccionar la habitación -->
+            <?php
+            while ($rowHabitacion = $resultHabitacionesDisponibles->fetch_assoc()) {
+                echo '<label>';
+                echo '<input type="radio" name="habitacion" value="' . $rowHabitacion['numero'] . '" required>';
+                echo ' Habitación ' . $rowHabitacion['numero'] . ' - ' . $rowHabitacion['tipo'] . ' ($' . $rowHabitacion['valor_diario'] . ' diario)';
+                echo '</label><br>';
+            }
+            ?>
         </div>
 
         <label for="dia_llegada">Día de Llegada:</label>

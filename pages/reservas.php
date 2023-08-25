@@ -49,7 +49,7 @@ $result = $conn->query($sql);
                             echo '<td>$' . $row['valor_diario'] . '</td>';
                             echo '<td>';
                             echo '<button class="modificar-button"><a href="modificar_reserva.php?documento=' . $row['documento'] . '">Modificar</a></button>';
-                            echo '<button class="eliminar-button"><a href="eliminar_reserva.php?documento=' . $row['documento'] . '">Eliminar</a></button>';
+                            echo '<button class="eliminar-button"><a href="eliminar_reserva.php?ticket=' . $row['ticket'] . '">Eliminar</a></button>';
                             echo '</td>';
                             echo '</tr>';
                         }
