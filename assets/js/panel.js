@@ -83,8 +83,12 @@ const formularioCrearHabitacion = document.getElementById(
 
 // Evento clic en el botón "Crear nueva Habitación"
 btnCrearHabitacion.addEventListener("click", () => {
-  console.log("Entra");
   modalCrearHabitacion.style.display = "block";
+});
+
+// Evento clic en el botón "Crear nueva Habitación"
+btnCrearUsuario.addEventListener("click", () => {
+  window.location.href = "../pages/crear_cuenta.php";
 });
 
 // Cerrar la ventana modal al hacer clic fuera del contenido

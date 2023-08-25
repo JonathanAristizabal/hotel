@@ -1,5 +1,5 @@
 <?php
-include 'conections/conection.php';
+include '../conections/conection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $documento = $_POST['documento'];
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/crear_cuenta.css">
+    <link rel="stylesheet" href="../assets/css/crear_cuenta.css">
 
     <title>crear cuenta</title>
 </head>
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <!-- Logo  -->
         <div id="logo">
-            <img src="img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
+            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
         </div>
         <nav>
             <ul class="ul-encabezado">

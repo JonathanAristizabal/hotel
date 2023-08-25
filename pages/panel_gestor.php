@@ -199,7 +199,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
-            <button class="crear-button">Crear nuevo Usuario</button>
+            <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
                 <table>
@@ -223,8 +223,9 @@ $result_habitaciones = $conn->query($sql_habitaciones);
                                 echo '<td>' . $row['correo'] . '</td>';
                                 echo '<td>' . $row['telefono'] . '</td>';
                                 echo '<td>';
-                                echo '<button class="modificar-button">Modificar</button>';
-                                echo '<button class="eliminar-button">Eliminar</button>';
+                                echo '<td>';
+                                echo '<button class="modificar-button"><a href="modificar_cuenta.php?documento=' . $row['documento'] . '">Modificar</a></button>';
+                                echo '<button class="eliminar-button"><a href="eliminar_cuenta.php?documento=' . $row['documento'] . '">Eliminar</a></button>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
