@@ -20,6 +20,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/panel_gestor.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Panel Gestor</title>
 </head>
 
@@ -231,7 +232,6 @@ $result_habitaciones = $conn->query($sql_habitaciones);
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
-            <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
                 <table>
@@ -267,6 +267,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
                         ?>
                     </tbody>
                 </table>
+                <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
             </div>
         </section>
         <!-- Módulo de Configuración -->

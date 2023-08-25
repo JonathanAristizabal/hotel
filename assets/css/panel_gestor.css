@@ -1,5 +1,11 @@
-Estilos para la barra de navegación principal body {
-  font-family: Arial, sans-serif;
+/* Estilos para la barra de navegación principal */
+
+/* Utilizar la fuente Roboto */
+body, header, footer {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
   margin: 0;
   padding: 0;
 }
