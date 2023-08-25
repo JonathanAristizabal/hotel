@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../assets/css/crear_cuenta.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 
-    <title>crear cuenta</title>
+    <title>Crear cuenta</title>
 </head>
 
 <body>

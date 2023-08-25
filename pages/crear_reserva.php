@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Generar un token aleatorio corto para el ticket
     $ticket = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6);
+
     // Calcular la cantidad de días reservados
     $fechaLlegada = new DateTime($diaLlegada);
     $fechaSalida = new DateTime($diaSalida);
@@ -27,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Consulta SQL para insertar la nueva reserva en la tabla huespedes
-    $sqlInsertReserva = "INSERT INTO huespedes (documento, ticket, dias_reservados, habitacion)
-                         VALUES ('$documento', '$ticket', '$diasReservados', '$habitacion')";
+    $sqlInsertReserva = "INSERT INTO huespedes (documento, ticket, habitacion, fecha_checkIN, fecha_checkOUT, dias_reservados)
+                         VALUES ('$documento', '$ticket', '$habitacion', '$diaLlegada', '$diaSalida', '$diasReservados')";
 
     if ($conn->query($sqlInsertReserva) === true) {
         // Actualizar estado de la habitación a ocupada (estado = 1)
@@ -38,13 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         echo '<script>
-            alert("Reserva exitosa. Se ha generado el ticket: ' . $ticket . '");
-            window.location.href = "reservas.php"; // Cambia "reservas.php" por la URL deseada.
-         </script>';
+        alert("Reserva exitosa. Se ha generado el ticket: ' . $ticket . '");
+        window.location.href = "reservas.php"; // Cambia "reservas.php" por la URL deseada.
+     </script>';
     } else {
         echo "Error al realizar la reserva: " . $conn->error;
     }
 }
+
 ?>
 
 <!DOCTYPE html>

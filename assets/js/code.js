@@ -73,34 +73,23 @@ function ocultarModulos() {
 
 ocultarModulos();
 
-//mostrar y ocultar la ventana modal cuando se hace clic en el botón
-// Obtener elementos
-const btnCrearHabitacion = document.getElementById("btnCrearHabitacion");
-const modalCrearHabitacion = document.getElementById("modalCrearHabitacion");
-const formularioCrearHabitacion = document.getElementById(
-  "formularioCrearHabitacion"
-);
-
-// Evento clic en el botón "Crear nueva Habitación"
-btnCrearHabitacion.addEventListener("click", () => {
-  modalCrearHabitacion.style.display = "block";
-});
-
-// Cerrar la ventana modal al hacer clic fuera del contenido
-modalCrearHabitacion.addEventListener("click", (event) => {
-  if (event.target === modalCrearHabitacion) {
-    modalCrearHabitacion.style.display = "none";
+document.addEventListener("DOMContentLoaded", function () {
+  const btnCrearUsuario = document.getElementById("btnCrearUsuario");
+  const btnCrearPedido = document.getElementById("btnCrearPedido");
+  const btnCrearHabitacion = document.getElementById("btnCrearHabitacion");
+  if (btnCrearUsuario) {
+    btnCrearUsuario.addEventListener("click", function () {
+      window.location.href = "crear_cuenta.php";
+    });
+  }
+  if (btnCrearPedido) {
+    btnCrearPedido.addEventListener("click", function () {
+      window.location.href = "crear_pedido.php";
+    });
+  }
+  if (btnCrearHabitacion) {
+    btnCrearHabitacion.addEventListener("click", function () {
+      window.location.href = "crear_habitacion.php";
+    });
   }
 });
-
-// Evento clic en el botón "Crear nueva Habitación"
-btnCrearUsuario.addEventListener("click", () => {
-  window.location.href = "../pages/crear_cuenta.php";
-});
-
-// Evitar que el clic dentro del formulario cierre la ventana modal
-formularioCrearHabitacion.addEventListener("click", (event) => {
-  event.stopPropagation();
-});
-
-

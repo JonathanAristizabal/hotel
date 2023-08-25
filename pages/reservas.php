@@ -42,6 +42,8 @@ $result = $conn->query($sql);
                     <tr>
                         <th>Documento</th>
                         <th>Ticket</th>
+                        <th>Fecha de Llegada</th>
+                        <th>Fecha de Salida</th>
                         <th>Días Reservados</th>
                         <th>Habitación</th>
                         <th>Tipo de Habitación</th>
@@ -56,18 +58,20 @@ $result = $conn->query($sql);
                             echo '<tr>';
                             echo '<td>' . $row['documento'] . '</td>';
                             echo '<td>' . $row['ticket'] . '</td>';
+                            echo '<td>' . $row['fecha_checkIN'] . '</td>';
+                            echo '<td>' . $row['fecha_checkOUT'] . '</td>';
                             echo '<td>' . $row['dias_reservados'] . '</td>';
                             echo '<td>' . $row['habitacion'] . '</td>';
                             echo '<td>' . $row['tipo'] . '</td>';
                             echo '<td>$' . $row['valor_diario'] . '</td>';
                             echo '<td>';
-                            echo '<button class="modificar-button"><a href="modificar_reserva.php?documento=' . $row['documento'] . '">Modificar</a></button>';
+                            echo '<button class="modificar-button"><a href="modificar_reserva.php?ticket=' . $row['ticket'] . '">Modificar</a></button>';
                             echo '<button class="eliminar-button"><a href="eliminar_reserva.php?ticket=' . $row['ticket'] . '">Eliminar</a></button>';
                             echo '</td>';
                             echo '</tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="6">No hay registros disponibles.</td></tr>';
+                        echo '<tr><td colspan="8">No hay registros disponibles.</td></tr>';
                     }
                     ?>
                 </tbody>

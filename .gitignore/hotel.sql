@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-08-2023 a las 07:04:56
+-- Tiempo de generación: 25-08-2023 a las 20:21:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -53,11 +53,11 @@ CREATE TABLE `habitaciones` (
 
 INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_diario`) VALUES
 (1, 'Individual', 0, 'asdfvg', 45000),
-(2, 'Doble', 1, 'sdfg', 70000),
-(3, 'Suite', 1, 'rtbyyw', 150000),
+(2, 'Doble', 0, 'sdfg', 70000),
+(3, 'Suite', 0, 'rtbyyw', 150000),
 (4, 'Suite', 0, 'qqqqqqqqqqq', 60000),
 (5, 'Doble', 0, 'lctm', 50000),
-(6, 'Suite', 1, 'ijijijij', 150000),
+(6, 'Suite', 0, 'ijijijij', 150000),
 (7, 'Doble', 0, 'eeeeéeeee', 50000);
 
 -- --------------------------------------------------------
@@ -69,17 +69,11 @@ INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_di
 CREATE TABLE `huespedes` (
   `documento` int(11) NOT NULL,
   `ticket` varchar(11) NOT NULL,
-  `dias_reservados` int(11) NOT NULL,
-  `habitacion` int(11) NOT NULL
+  `habitacion` int(11) NOT NULL,
+  `fecha_checkIN` date NOT NULL,
+  `fecha_checkOUT` date NOT NULL,
+  `dias_reservados` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `huespedes`
---
-
-INSERT INTO `huespedes` (`documento`, `ticket`, `dias_reservados`, `habitacion`) VALUES
-(30324221, '8QD6FT', 2, 2),
-(1053872476, 'QAWTVS', 5, 6);
 
 -- --------------------------------------------------------
 

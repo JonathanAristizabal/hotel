@@ -19,5 +19,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al crear la habitación: " . $conn->error;
     }
 }
-
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="modalCrearHabitacion" class="modal">
+        <div class="modal-content">
+            <h2>Crear Nueva Habitación</h2>
+            <form id="formularioCrearHabitacion" action="crear_habitacion.php" method="post">
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" name="numero" required>
+
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="Individual">Individual</option>
+                    <option value="Doble">Doble</option>
+                    <option value="Suite">Suite</option>
+                </select>
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" required>
+
+                <label for="valor_diario">Valor Diario:</label>
+                <input type="number" id="valor_diario" name="valor_diario" required>
+
+                <button type="submit">Crear Habitación</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

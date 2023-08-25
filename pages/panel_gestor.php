@@ -112,35 +112,6 @@ $result_habitaciones = $conn->query($sql_habitaciones);
         </section>
         <!-- Modulo de Habitaciones -->
         <section class="modulo" id="habitaciones">
-            <!-- 
-                Formulario para crear habitación
-             -->
-            <div id="modalCrearHabitacion" class="modal">
-                <div class="modal-content">
-                    <h2>Crear Nueva Habitación</h2>
-                    <form id="formularioCrearHabitacion" action="crear_habitacion.php" method="post">
-                        <label for="numero">Número:</label>
-                        <input type="number" id="numero" name="numero" required>
-
-                        <label for="tipo">Tipo:</label>
-                        <select id="tipo" name="tipo" required>
-                            <option value="Individual">Individual</option>
-                            <option value="Doble">Doble</option>
-                            <option value="Suite">Suite</option>
-                        </select>
-
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" id="descripcion" name="descripcion" required>
-
-                        <label for="valor_diario">Valor Diario:</label>
-                        <input type="number" id="valor_diario" name="valor_diario" required>
-
-                        <button type="submit">Crear Habitación</button>
-                    </form>
-                </div>
-            </div>
-
-            </div>
             <button class="crear-button" id="btnCrearHabitacion">Crear nueva Habitación</button>
             <div class="modulo-header">Habitaciones</div>
             <div class="modulo-content">
@@ -223,15 +194,49 @@ $result_habitaciones = $conn->query($sql_habitaciones);
 
         <!-- Módulo de Pedidos -->
         <section class="modulo" id="pedidos">
+            <button class="crear-button" id="btnCrearPedido">Crear nuevo Pedido</button>
             <div class="modulo-header">Pedidos</div>
             <div class="modulo-content">
-                <!-- Contenido del módulo de pedidos... -->
-                <p>Contenido del módulo de pedidos...</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Descripción</th>
+                            <th>Valor</th>
+                            <th>Habitación</th>
+                            <th>Ticket</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Consulta SQL para obtener información de pedidos
+                        $sqlPedidos = "SELECT p.documento, p.descripcion, p.valor, p.habitacion, h.ticket
+                               FROM pedidos p
+                               LEFT JOIN huespedes h ON p.documento = h.documento";
+
+                        $resultPedidos = $conn->query($sqlPedidos);
+
+                        if ($resultPedidos->num_rows > 0) {
+                            while ($rowPedido = $resultPedidos->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $rowPedido['documento'] . '</td>';
+                                echo '<td>' . $rowPedido['descripcion'] . '</td>';
+                                echo '<td>' . $rowPedido['valor'] . '</td>';
+                                echo '<td>' . $rowPedido['habitacion'] . '</td>';
+                                echo '<td>' . $rowPedido['ticket'] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5">No hay pedidos disponibles.</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </section>
-
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
+            <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
                 <table>
@@ -267,7 +272,6 @@ $result_habitaciones = $conn->query($sql_habitaciones);
                         ?>
                     </tbody>
                 </table>
-                <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
             </div>
         </section>
         <!-- Módulo de Configuración -->
