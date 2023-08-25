@@ -1,4 +1,19 @@
-Utilizar la fuente Roboto
+/* Estilos generales */
+/* Utilizar la fuente Roboto */
 body, header, footer {
   font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #34495e;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }

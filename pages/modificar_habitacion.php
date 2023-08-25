@@ -42,14 +42,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Modificar Habitación</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/modificar_habitacion.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <title>MOdificar_habitacion</title>
 </head>
-
 <body>
+    
+</body>
+</html>
+<body>
+    <!-- encabezado -->
+    <header>
+        <div id="logo">
+            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
+        </div>
+        <nav>
+            <ul class="ul-encabezados">
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="login.php">Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
     <h2>Modificar Habitación</h2>
     <form method="post">
 
