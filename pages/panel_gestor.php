@@ -183,8 +183,40 @@ $result_habitaciones = $conn->query($sql_habitaciones);
         <section class="modulo" id="huespedes">
             <div class="modulo-header">Huéspedes</div>
             <div class="modulo-content">
-                <!-- Contenido del módulo de huéspedes... -->
-                <p>Contenido del módulo de huéspedes...</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Ticket</th>
+                            <th>Días Reservados</th>
+                            <th>Habitación</th>
+                            <th>Valor Diario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Consulta SQL para obtener los datos de la tabla huespedes y habitaciones
+                        $sqlHuespedes = "SELECT h.documento, h.ticket, h.dias_reservados, h.habitacion, hab.valor_diario
+                                 FROM huespedes h
+                                 JOIN habitaciones hab ON h.habitacion = hab.numero";
+                        $resultHuespedes = $conn->query($sqlHuespedes);
+
+                        if ($resultHuespedes->num_rows > 0) {
+                            while ($rowHuespedes = $resultHuespedes->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $rowHuespedes['documento'] . '</td>';
+                                echo '<td>' . $rowHuespedes['ticket'] . '</td>';
+                                echo '<td>' . $rowHuespedes['dias_reservados'] . '</td>';
+                                echo '<td>' . $rowHuespedes['habitacion'] . '</td>';
+                                echo '<td>' . '$' . $rowHuespedes['valor_diario'] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5">No hay registros disponibles.</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </section>
 

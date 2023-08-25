@@ -18,9 +18,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-
     <section class="modulo" id="huespedes">
         <button class="crear-button" id="btnHacerReservacion">Hacer Reservación</button>
+
+        <button class="" id=""><a href="panel_gestor.php">Volver</a></button>
         <div class="modulo-header">Reservas</div>
         <div class="modulo-content">
             <table>
@@ -32,6 +33,7 @@ $result = $conn->query($sql);
                         <th>Habitación</th>
                         <th>Tipo de Habitación</th>
                         <th>Valor Diario</th>
+                        <th>Acciónes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +47,10 @@ $result = $conn->query($sql);
                             echo '<td>' . $row['habitacion'] . '</td>';
                             echo '<td>' . $row['tipo'] . '</td>';
                             echo '<td>$' . $row['valor_diario'] . '</td>';
+                            echo '<td>';
+                            echo '<button class="modificar-button"><a href="modificar_reserva.php?documento=' . $row['documento'] . '">Modificar</a></button>';
+                            echo '<button class="eliminar-button"><a href="eliminar_reserva.php?documento=' . $row['documento'] . '">Eliminar</a></button>';
+                            echo '</td>';
                             echo '</tr>';
                         }
                     } else {
@@ -56,5 +62,6 @@ $result = $conn->query($sql);
         </div>
     </section>
 </body>
-<script src="../assets/js/code.js"></script>
+<script src="../assets/js/reservas.js"></script>
+
 </html>

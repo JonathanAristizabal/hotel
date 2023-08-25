@@ -103,7 +103,4 @@ formularioCrearHabitacion.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// Evento clic en el botón "Crear nueva Habitación"
-btnHacerReservacion.addEventListener("click", () => {
-  window.location.href = "crear_reserva.php";
-});
+
