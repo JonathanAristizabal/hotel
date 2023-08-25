@@ -252,6 +252,6 @@ $result_habitaciones = $conn->query($sql_habitaciones);
         <p>&copy; 2023 Panel de Gestión. Todos los derechos reservados.</p>
     </footer>
 </body>
-<script src="../assets/js/panel.js"></script>
+<script src="../assets/js/code.js"></script>
 
 </html>

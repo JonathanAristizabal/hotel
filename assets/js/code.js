@@ -86,11 +86,6 @@ btnCrearHabitacion.addEventListener("click", () => {
   modalCrearHabitacion.style.display = "block";
 });
 
-// Evento clic en el botón "Crear nueva Habitación"
-btnCrearUsuario.addEventListener("click", () => {
-  window.location.href = "../pages/crear_cuenta.php";
-});
-
 // Cerrar la ventana modal al hacer clic fuera del contenido
 modalCrearHabitacion.addEventListener("click", (event) => {
   if (event.target === modalCrearHabitacion) {
@@ -98,7 +93,17 @@ modalCrearHabitacion.addEventListener("click", (event) => {
   }
 });
 
+// Evento clic en el botón "Crear nueva Habitación"
+btnCrearUsuario.addEventListener("click", () => {
+  window.location.href = "../pages/crear_cuenta.php";
+});
+
 // Evitar que el clic dentro del formulario cierre la ventana modal
 formularioCrearHabitacion.addEventListener("click", (event) => {
   event.stopPropagation();
+});
+
+// Evento clic en el botón "Crear nueva Habitación"
+btnHacerReservacion.addEventListener("click", () => {
+  window.location.href = "crear_reserva.php";
 });

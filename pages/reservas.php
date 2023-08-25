@@ -20,10 +20,9 @@ $result = $conn->query($sql);
 <body>
 
     <section class="modulo" id="huespedes">
-        <div class="modulo-header">Huéspedes</div>
         <button class="crear-button" id="btnHacerReservacion">Hacer Reservación</button>
+        <div class="modulo-header">Reservas</div>
         <div class="modulo-content">
-            <h1>Listado de Huéspedes y Reservas</h1>
             <table>
                 <thead>
                     <tr>
@@ -57,6 +56,5 @@ $result = $conn->query($sql);
         </div>
     </section>
 </body>
-
+<script src="../assets/js/code.js"></script>
 </html>
-<!-- Modulo de Huéspedes -->
