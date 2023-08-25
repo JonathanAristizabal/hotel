@@ -17,3 +17,32 @@ header {
   align-items: center;
   padding: 10px;
 }
+
+nav {
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: inline-block; /* Cambia la visualización a "inline-block" */
+  margin: 0;
+  padding: 10px 0px 15px 0px;
+}
+
+nav ul li {
+  display: inline; /* Muestra los elementos de navegación en línea */
+  margin-right: 20px; /* Espacio entre los elementos de navegación */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+nav ul li a:hover {
+  color: #919191;
+}
+
+main {
+  padding: 20px;
+}
