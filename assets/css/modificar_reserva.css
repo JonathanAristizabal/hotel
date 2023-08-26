@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #34495e;
     color: white;
     padding: 10px;
     display: flex;
@@ -34,28 +34,31 @@ ul.ul-encabezados a {
 /* Estilos para el módulo de modificación de reserva */
 .modulo {
     background-color: white;
-    width: 80%;
-    max-width: 800px;
+    width: 90%;
     margin: 20px auto;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #34495e; /* Cambia el color del texto del formulario */
 }
 
 .modulo-header {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .modulo-content {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centra verticalmente los elementos en el contenedor */
 }
 
 .top-section {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    width: 100%; /* Asegura que los elementos ocupen todo el ancho del contenedor */
 }
 
 .top-left,
@@ -83,16 +86,17 @@ select {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     transition: border-color 0.3s ease-in-out;
+    color: #34495e; /* Cambia el color del texto del formulario */
 }
 
 select {
-    width: 100%;
+    width: 40%;
 }
 
 button[type="submit"] {
-    background-color: #333;
+    background-color: #34495e;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -120,4 +124,18 @@ button[type="submit"]:hover {
 
 /* Estilos para el encabezado de navegación */
 nav ul {
-    list
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+    color: red;
+    font-weight: bold;
+}

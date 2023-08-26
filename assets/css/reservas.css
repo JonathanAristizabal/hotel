@@ -94,6 +94,136 @@ tbody tr:nth-child(even) {
     background-color: #f2f2f2; /* Fondo alternado para filas pares */
 }
 
+/* Estilos generales */
+/* Utilizar la fuente Roboto */
+body, header, footer {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 10px 0px 15px 0px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li a:hover {
+    color: #919191;
+}
+
+/* Estilos para el contenido principal */
+main {
+    padding: 20px;
+}
+
+/* Estilos para botones */
+.crear-button,
+.modificar-button,
+.eliminar-button {
+    background-color: #34495e;
+    color: #fff;
+    border: none;
+    padding: 8px 16px; /* Ajustar la longitud de los botones */
+    margin-right: 8px; /* Separación entre los botones */
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.crear-button:hover,
+.modificar-button:hover,
+.eliminar-button:hover {
+    background-color: #6e6e6e;
+}
+
+/* Estilos para la tabla */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto; /* Centrar la tabla y ajustar la distancia desde arriba */
+    padding: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc; /* Borde para celdas y columnas */
+}
+
+th, td {
+    font-size: 16px;
+    text-align: center; /* Centra el contenido de las celdas */
+    padding: 8px;
+}
+
+th {
+    background-color: #34495e;
+    color: #fff;
+    font-weight: normal; /* Eliminar negritas de los títulos de la tabla */
+}
+
+/* Estilos adicionales para la tabla */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo alternado para filas pares */
+}
+
+/* Estilos para el módulo de modificación de reserva */
+.modulo {
+    background-color: white;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #34495e; /* Cambia el color del texto del formulario */
+}
+
+.modulo-header {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Estilos para contenido centralizado */
+.modulo-content {
+    text-align: center;
+}
+
+/* Estilos para enlaces */
+.modulo-content a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.modulo-content a:hover {
+    color: #34495e;
+}
+
+
 /* Estilos para encabezados */
 .modulo-header {
     font-size: 20px;

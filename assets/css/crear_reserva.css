@@ -1,48 +1,133 @@
 /* Estilos generales */
-/* Utilizar la fuente Roboto */
-body, header, footer {
-    font-family: "Roboto", sans-serif;
-  }
-
 body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
 }
 
+/* Encabezado */
 header {
     background-color: #34495e;
-    color: #fff;
+    color: white;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    
 }
 
-nav {
+h1{
     text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    display: inline-block; /* Cambia la visualización a "inline-block" */
-    margin: 0;
-    padding: 10px 0px 15px 0px;
+form{
+    padding: 0px 0px 0px 400px;
 }
 
-nav ul li {
-    display: inline; /* Muestra los elementos de navegación en línea */
-    margin-right: 20px; /* Espacio entre los elementos de navegación */
+/* Navegación */
+ul.ul-encabezados {
+    list-style-type: none;
+    padding: 0;
 }
 
-nav ul li a {
+ul.ul-encabezados li {
+    display: inline;
+    margin-right: 20px;
+}
+
+ul.ul-encabezados a {
     text-decoration: none;
-    color: #fff;
+    color: white;
 }
 
-nav ul li a:hover {
-    color: #919191;
+/* Módulo de modificación de reserva */
+.modulo {
+    background-color: white;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px ;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #34495e; /* Cambia el color del texto del formulario */
 }
 
-main {
-    padding: 20px;
+.modulo-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modulo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Sección superior del módulo */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.top-left,
+.top-right {
+    flex: 1;
+    margin-right: 20px;
+}
+
+/* Etiquetas */
+label {
+    margin-bottom: 5px;
+}
+
+/* Campos de entrada y selectores */
+input[type="text"],
+input[type="date"],
+select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+    color: #34495e; /* Cambia el color del texto del formulario */
+}
+
+select {
+    width: 40%;
+}
+
+/* Botones */
+button[type="submit"] {
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Efecto de hover para botones */
+button[type="submit"]:hover {
+    background-color: #555; /* Cambia el color de fondo al pasar el cursor sobre el botón */
+}
+
+/* Logo */
+#logo {
+    margin-left: 20px;
+}
+
+#logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: red;
+    font-weight: bold;
 }
