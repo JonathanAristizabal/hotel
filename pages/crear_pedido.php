@@ -37,10 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/crear_pedido.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+
     <title>Crear Nuevo Pedido</title>
 </head>
 
 <body>
+    <header>
+        <div id="logo">
+            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
+        </div>
+        <nav>
+            <ul class="ul-encabezados">
+                <li><a href="panel_gestor.php">Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>Crear Nuevo Pedido</h1>
     <form action="" method="POST">
         <label for="documento">Documento y Ticket:</label>
