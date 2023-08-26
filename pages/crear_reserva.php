@@ -77,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <br>
     <h1>Crear Nueva Reserva</h1>
+        
     <form action="crear_reserva.php" method="POST">
         <label for="documento">Documento:</label>
         <select id="documento" name="documento" required>
