@@ -2,9 +2,6 @@
 /* Utilizar la fuente Roboto */
 body, header, footer {
     font-family: "Roboto", sans-serif;
-  }
-
-body {
     margin: 0;
     padding: 0;
 }
@@ -24,14 +21,14 @@ nav {
 
 nav ul {
     list-style: none;
-    display: inline-block; /* Cambia la visualización a "inline-block" */
+    display: inline-block;
     margin: 0;
     padding: 10px 0px 15px 0px;
 }
 
 nav ul li {
-    display: inline; /* Muestra los elementos de navegación en línea */
-    margin-right: 20px; /* Espacio entre los elementos de navegación */
+    display: inline;
+    margin-right: 20px;
 }
 
 nav ul li a {
@@ -45,4 +42,76 @@ nav ul li a:hover {
 
 main {
     padding: 20px;
+}
+
+/* Estilos para botones */
+.crear-button,
+.modificar-button,
+.eliminar-button {
+    background-color: #34495e;
+    color: #fff;
+    border: none;
+    padding: 8px 16px; /* Ajustar la longitud de los botones */
+    margin-right: 8px; /* Separación entre los botones */
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.crear-button:hover,
+.modificar-button:hover,
+.eliminar-button:hover {
+    background-color: #6e6e6e;
+}
+
+/* Estilos para la tabla */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto; /* Centrar la tabla y ajustar la distancia desde arriba */
+    padding: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc; /* Borde para celdas y columnas */
+}
+
+th, td {
+    font-size: 16px;
+    text-align: center; /* Centra el contenido de las celdas */
+    padding: 8px;
+}
+
+th {
+    background-color: #34495e;
+    color: #fff;
+    font-weight: normal; /* Eliminar negritas de los títulos de la tabla */
+}
+
+/* Estilos adicionales para la tabla */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo alternado para filas pares */
+}
+
+/* Estilos para encabezados */
+.modulo-header {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Estilos para contenido centralizado */
+.modulo-content {
+    text-align: center;
+}
+
+/* Estilos para enlaces */
+.modulo-content a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.modulo-content a:hover {
+    color: #34495e;
 }

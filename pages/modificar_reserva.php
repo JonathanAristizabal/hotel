@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css//reservas.css">
+    <link rel="stylesheet" href="../assets/css/modificar_reserva.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Modificar Reserva</title>
 </head>
@@ -98,12 +98,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="modulo-header">Modificar Reserva</div>
         <div class="modulo-content">
             <form action="" method="POST">
+                <div>
                 <label for="documento">Documento:</label>
                 <input type="text" id="documento" name="documento" value="<?php echo $rowHuesped['documento']; ?>" readonly>
 
                 <label for="ticket">Ticket:</label>
                 <input type="text" id="ticket" name="ticket" value="<?php echo $rowHuesped['ticket']; ?>" readonly>
-
+                </div>
+                <div>
                 <label for="nueva_fecha_llegada">Nueva Fecha de Llegada:</label>
                 <input type="date" id="nueva_fecha_llegada" name="nueva_fecha_llegada" value="<?php echo $rowHuesped['fecha_checkIN']; ?>" required>
 
@@ -112,7 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <label for="dias_reservados">Días Reservados:</label>
                 <input type="text" id="dias_reservados" name="dias_reservados" value="<?php echo $rowHuesped['dias_reservados']; ?>" readonly>
-
+                </div>
+                <div>
                 <label for="habitacionActual">Habitación Actual:</label>
                 <input type="text" id="habitacionActual" name="habitacionActual" value="<?php echo $habitacion; ?>" disabled>
 
@@ -130,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     ?>
                 </select>
+                </div>
                 <button type="submit">Guardar Cambios</button>
             </form>
         </div>

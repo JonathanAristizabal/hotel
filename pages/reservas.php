@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css//reservas.css">
+    <link rel="stylesheet" href="../assets/css/reservas.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Reservas</title>
 </head>
@@ -32,9 +32,6 @@ $result = $conn->query($sql);
     </header>
     <br>
     <section class="modulo" id="huespedes">
-        <button class="crear-button" id="btnHacerReservacion">Hacer Reservación</button>
-
-        <button class="" id=""><a href="panel_gestor.php">Volver</a></button>
         <div class="modulo-header">Reservas</div>
         <div class="modulo-content">
             <table>
@@ -76,6 +73,8 @@ $result = $conn->query($sql);
                     ?>
                 </tbody>
             </table>
+            <br>
+            <button class="crear-button" id="btnHacerReservacion">Crear reserva</button>
         </div>
     </section>
 </body>

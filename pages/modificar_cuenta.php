@@ -53,11 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar cuenta</title>
+    <title>Modificar cuenta de usuario</title>
     <link rel="stylesheet" href="../assets/css/modificar_cuenta.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 </head>
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </nav>
     </header>
     <br>
-    <h1>Modificar Cuenta</h1>
+    <h1>Modificar Cuenta de usuario</h1>
     <form method="post" action="">
         <label for="correo">Correo:</label>
         <input type="email" id="correo" name="correo" value="<?php echo $correo; ?>" required><br>

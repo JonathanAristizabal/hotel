@@ -20,24 +20,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/crear_habitacion.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+
+    <title>Crear Habitacion</title>
 </head>
 
 <body>
+     <!-- encabezado -->
+     <header>
+        <!-- Logo  -->
+        <div id="logo">
+            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
+        </div>
+        <nav>
+            <ul class="ul-encabezado">
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="login.php">Regresar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
+    
     <div id="modalCrearHabitacion" class="modal">
         <div class="modal-content">
             <h2>Crear Nueva Habitación</h2>
             <form id="formularioCrearHabitacion" action="crear_habitacion.php" method="post">
-                <label for="numero">Número:</label>
+                <label for="numero">Número de habitacion:</label>
                 <input type="number" id="numero" name="numero" required>
 
-                <label for="tipo">Tipo:</label>
+                <label for="tipo">Tipo de habitacion:</label>
                 <select id="tipo" name="tipo" required>
                     <option value="Individual">Individual</option>
                     <option value="Doble">Doble</option>
