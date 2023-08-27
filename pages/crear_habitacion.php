@@ -38,8 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <nav>
             <ul class="ul-encabezado">
-                <li><a href="../index.php">Inicio</a></li>
-                <li><a href="login.php">Regresar</a></li>
+                <li><a href="panel_gestor.php">Regresar</a></li>
             </ul>
         </nav>
     </header>
