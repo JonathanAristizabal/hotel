@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+    color: #34495e;
 }
 
 /* Encabezado */
@@ -14,15 +15,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 
-h1{
+h1 {
     text-align: center;
-}
-
-form{
-    padding: 0px 0px 0px 400px;
+    font-size: 20px;
 }
 
 /* Navegación */
@@ -46,15 +43,18 @@ ul.ul-encabezados a {
     background-color: white;
     width: 90%;
     margin: 20px auto;
-    padding: 20px ;
+    padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    color: #34495e; /* Cambia el color del texto del formulario */
+    color: #34495e;
+    text-align: center; /* Centro el contenido en el módulo */
 }
 
 .modulo-header {
-    font-size: 24px;
-    margin-bottom: 20px;
     text-align: center;
+    color: #34495e;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .modulo-content {
@@ -91,7 +91,7 @@ select {
     border-radius: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease-in-out;
-    color: #34495e; /* Cambia el color del texto del formulario */
+    color: #34495e;
 }
 
 select {
@@ -106,14 +106,14 @@ button[type="submit"] {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease-in-out;
 }
 
 /* Efecto de hover para botones */
 button[type="submit"]:hover {
-    background-color: #555; /* Cambia el color de fondo al pasar el cursor sobre el botón */
+    background-color: #6e6e6e;
 }
 
 /* Logo */
@@ -130,4 +130,25 @@ button[type="submit"]:hover {
 .error-message {
     color: red;
     font-weight: bold;
+}
+
+/* Estilos para la sección */
+section {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Agregado efecto de sombra */
+    background-color: #f8f8f8; /* Fondo */
+}
+
+/* Estilos para el mensaje de reserva */
+.reserva-mensaje {
+    background-color: #f3f3f3; /* Color de fondo */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Texto centrado */
+    font-weight: bold; /* Letra en negrita */
+    padding: 10px; /* Espacio interno */
+    margin-top: 20px; /* Espacio superior */
+    border: 1px solid #ccc; /* Borde */
+    color: #34495e; /* Color de texto */
 }

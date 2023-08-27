@@ -9,6 +9,8 @@ $resultDocumentos = $conn->query($sqlDocumentos);
 $sqlHabitacionesDisponibles = "SELECT numero, tipo, valor_diario FROM habitaciones WHERE estado = 0";
 $resultHabitacionesDisponibles = $conn->query($sqlHabitacionesDisponibles);
 
+// Variables para mensajes de éxito o error
+$reservaMensaje = "";
 
 // Cuando se envíe el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $intervalo = $fechaLlegada->diff($fechaSalida);
     $diasReservados = $intervalo->days;
 
-
     // Consulta SQL para insertar la nueva reserva en la tabla huespedes
     $sqlInsertReserva = "INSERT INTO huespedes (documento, ticket, habitacion, fecha_checkIN, fecha_checkOUT, dias_reservados)
                          VALUES ('$documento', '$ticket', '$habitacion', '$diaLlegada', '$diaSalida', '$diasReservados')";
@@ -35,18 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Actualizar estado de la habitación a ocupada (estado = 1)
         $sqlUpdateHabitacion = "UPDATE habitaciones SET estado = 1 WHERE numero = '$habitacion'";
         if ($conn->query($sqlUpdateHabitacion) === false) {
-            echo "Error al actualizar el estado de la habitación: " . $conn->error;
+            $reservaMensaje = "Error al actualizar el estado de la habitación: " . $conn->error;
+        } else {
+            $reservaMensaje = "Reserva exitosa. Se ha generado el ticket: $ticket";
+            // Puedes redirigir al usuario a una página de éxito o a donde desees
         }
-
-        echo '<script>
-        alert("Reserva exitosa. Se ha generado el ticket: ' . $ticket . '");
-        window.location.href = "reservas.php"; // Cambia "reservas.php" por la URL deseada.
-     </script>';
     } else {
-        echo "Error al realizar la reserva: " . $conn->error;
+        $reservaMensaje = "Error al realizar la reserva: " . $conn->error;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/crear_reserva.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-
     <title>Crear Reserva</title>
 </head>
 
@@ -69,48 +66,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <nav>
                 <ul class="ul-encabezados">
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="panel_gestor.php">Regresar</a></li>
+                    <li><a href="panel_gestor.php">Panel gestor</a></li>
+                    <li><a href="reservas.php">Regresar</a></li>
                 </ul>
             </nav>
         </header>
     </div>
     <br>
-    <h1>Crear Nueva Reserva</h1>
-        
-    <form action="crear_reserva.php" method="POST">
-        <label for="documento">Documento:</label>
-        <select id="documento" name="documento" required>
-            <?php
-            while ($rowDocumento = $resultDocumentos->fetch_assoc()) {
-                echo '<option value="' . $rowDocumento['documento'] . '">' . $rowDocumento['documento'] . '</option>';
-            }
-            ?>
-        </select>
-        <br>
-        <label for="habitacion">Habitación:</label>
-        <br>
-        <br>
-        <div>
-            <?php
-            while ($rowHabitacion = $resultHabitacionesDisponibles->fetch_assoc()) {
-                echo '<label>';
-                echo '<input type="radio" name="habitacion" value="' . $rowHabitacion['numero'] . '" required>';
-                echo ' Habitación ' . $rowHabitacion['numero'] . ' - ' . $rowHabitacion['tipo'] . ' ($' . $rowHabitacion['valor_diario'] . ' diario)';
-                echo '</label><br>';
-            }
-            ?>
-        </div>
-        <br>
-        <label for="dia_llegada">Día de Llegada:</label>
-        <input type="date" id="dia_llegada" name="dia_llegada" required>
+    <section>
+        <div class="modulo-header">Crear reserva</div>
+        <form action="crear_reserva.php" method="POST">
+            <label for="documento">Documento:</label>
+            <select id="documento" name="documento" required>
+                <?php
+                while ($rowDocumento = $resultDocumentos->fetch_assoc()) {
+                    echo '<option value="' . $rowDocumento['documento'] . '">' . $rowDocumento['documento'] . '</option>';
+                }
+                ?>
+            </select>
+            <br>
+            <label for="habitacion">Habitación:</label>
+            <br>
+            <br>
+            <div>
+                <?php
+                while ($rowHabitacion = $resultHabitacionesDisponibles->fetch_assoc()) {
+                    echo '<label>';
+                    echo '<input type="radio" name="habitacion" value="' . $rowHabitacion['numero'] . '" required>';
+                    echo ' Habitación ' . $rowHabitacion['numero'] . ' - ' . $rowHabitacion['tipo'] . ' ($' . $rowHabitacion['valor_diario'] . ' diario)';
+                    echo '</label><br>';
+                }
+                ?>
+            </div>
+            <br>
+            <label for="dia_llegada">Día de Llegada:</label>
+            <input type="date" id="dia_llegada" name="dia_llegada" required>
 
-        <label for="dia_salida">Día de Salida:</label>
-        <input type="date" id="dia_salida" name="dia_salida" required>
-        <br>
-        <br>
-        <button type="submit">Reservar</button>
-    </form>
+            <label for="dia_salida">Día de Salida:</label>
+            <input type="date" id="dia_salida" name="dia_salida" required>
+            <br>
+            <br>
+            <button type="submit">Reservar</button>
+        </form>
+        <!-- Mostrar mensajes de éxito o error -->
+        <div class="reserva-mensaje">
+            <p><?php echo $reservaMensaje; ?></p>
+        </div>
+    </section>
 </body>
 
 </html>

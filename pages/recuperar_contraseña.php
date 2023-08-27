@@ -18,7 +18,7 @@
         </div>
         <nav>
             <ul class="ul-encabezados">
-                <li><a href="index.php">Inicio</a></li>
+                <li><a href="../index.php">Inicio</a></li>
                 <li><a href="login.php">Regresar</a></li>
             </ul>
         </nav>

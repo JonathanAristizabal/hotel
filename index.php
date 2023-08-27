@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Sistema de gestion hotelera</title>
 </head>
@@ -13,13 +13,13 @@
     <header>
         <!-- Logo  -->
         <div id="logo">
-            <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px" >
+            <img src="./assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px" >
         </div>
         <nav>
             <ul class="ul-encabezado">
                 <li><a href="index.php">Inicio</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="panel_gestor.php">Panel</a></li>
+                <li><a href="./pages/login.php">Login</a></li>
+                <li><a href="./pages/panel_gestor.php">Panel</a></li>
             </ul>
         </nav>
     </header>
@@ -27,7 +27,7 @@
     <!-- portada bienvenida -->
     <main>
         <section id="bienvenida">
-            <img src="../assets/img/soporte.jpg" alt="Imagen del Hotel">
+            <img src="./assets/img/soporte.jpg" alt="Imagen del Hotel">
             <h1>Bienvenidos</h1>
             <p>Simplificamos la gestión hotelera para que puedas concentrarte en brindar una experiencia excepcional a tus huéspedes. Optimiza reservas, gestiona habitaciones y recursos de manera eficiente, y toma decisiones informadas. ¡Descubre cómo podemos potenciar tu hotel!</p>
         </section>
@@ -38,17 +38,17 @@
         </section>
         <section id="servicios">
             <div class="servicio">
-                <img src="../assets/img/analisis.jpg" alt="analisis">
+                <img src="./assets/img/analisis.jpg" alt="analisis">
                 <h2>Analisis</h2>
                 <p>Sistema de análisis</p>
             </div>
             <div class="servicio">
-                <img src="../assets/img/negociando.jpg" alt="negocios">
+                <img src="./assets/img/negociando.jpg" alt="negocios">
                 <h2>Negocios</h2>
                 <p>Realiza negocios</p>
             </div>
             <div class="servicio">
-                <img src="../assets/img/graficos.jpg" alt="Soporte">
+                <img src="./assets/img/graficos.jpg" alt="Soporte">
                 <h2>Soporte</h2>
                 <p>Soporte y asistencia</p>
             </div>

@@ -6,6 +6,7 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Estilos para el encabezado */
 header {
     background-color: #34495e;
     color: white;
@@ -15,6 +16,11 @@ header {
     align-items: center;
 }
 
+titulo-header{
+    color: #34495e;
+}
+
+/* Estilos para la lista de encabezados */
 ul.ul-encabezados {
     list-style-type: none;
     padding: 0;
@@ -28,7 +34,6 @@ ul.ul-encabezados li {
 ul.ul-encabezados a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
 }
 
 /* Estilos para el módulo de modificación de reserva */
@@ -42,10 +47,11 @@ ul.ul-encabezados a {
 }
 
 .modulo-header {
-    font-size: 20px;
-    font-weight: bold;
+    color: #34495e;
+    font-size: 22px;
     margin-bottom: 20px;
     text-align: center;
+    font-weight: bold; /* Corrección: agregado punto y coma */
 }
 
 .modulo-content {
@@ -103,7 +109,6 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: bold;
     transition: background-color 0.3s ease-in-out;
 }
 

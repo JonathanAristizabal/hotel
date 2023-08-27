@@ -20,7 +20,7 @@ if (isset($_GET['ticket'])) {
             if ($conn->query($sqlActualizarHabitacion) === true) {
                 echo '<script>
                         alert("Reserva eliminada con éxito. Habitación disponible nuevamente.");
-                        window.location.href = "panel_gestor.php"; 
+                        window.location.href = "reservas.php"; 
                      </script>';
             } else {
                 echo "Error al actualizar el estado de la habitación: " . $conn->error;

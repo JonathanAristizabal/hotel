@@ -7,6 +7,6 @@ session_destroy();
 // Redirigir a la página de inicio después de cerrar sesión
 echo '<script>
         alert("Sesión cerrada correctamente.");
-        window.location.href = "index.php"; // Cambia "index.php" por la URL de tu página de inicio de sesión.
+        window.location.href = "../index.php"; // Cambia "index.php" por la URL de tu página de inicio de sesión.
      </script>';
 ?>

@@ -33,7 +33,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
         <h1>Panel de gestión</h1>
         <nav class="navegacion">
             <ul>
-                <li><a href="index.php">Inicio</a></li>
+                <li><a href="../index.php">Inicio</a></li>
                 <li><a href="reservas.php">Reservas</a></li>
                 <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>

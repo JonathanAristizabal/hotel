@@ -9,7 +9,6 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,6 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Reservas</title>
 </head>
-
 <body>
     <!-- encabezado -->
     <header>
@@ -34,6 +32,16 @@ $result = $conn->query($sql);
     <section class="modulo" id="huespedes">
         <div class="modulo-header">Reservas</div>
         <div class="modulo-content">
+            <!-- Agrega un elemento de filtro -->
+            <label for="filtroTipo">Filtrar por Tipo de Habitación:</label>
+            <select id="filtroTipo">
+                <option value="">Todos</option>
+                <option value="Individual">Individual</option>
+                <option value="Doble">Doble</option>
+                <option value="Suite">Suite</option>
+                <!-- Agrega más opciones según tus tipos de habitación -->
+            </select>
+            
             <table>
                 <thead>
                     <tr>
@@ -79,5 +87,6 @@ $result = $conn->query($sql);
     </section>
 </body>
 <script src="../assets/js/reservas.js"></script>
-
+<script src="../assets/js/filtros_reservas.js"></script>
 </html>
+
