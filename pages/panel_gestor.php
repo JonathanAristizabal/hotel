@@ -322,7 +322,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
-            <div><button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button></div>
+            <div>
+                <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
+            </div>
             <br>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
@@ -348,8 +350,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td><?= $row['correo'] ?></td>
                                     <td><?= $row['telefono'] ?></td>
                                     <td>
-                                        <button class="modificar-button" style="color: white;"><a href="modificar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
-                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
+                                        <button class="modificar-button">
+                                            <a href="modificar_cuenta.php?documento=<?= $row['documento'] ?>" style="color: white; text-decoration: none;">Modificar</a>
+                                        </button>
+                                        <button class="eliminar-button">
+                                            <a href="eliminar_cuenta.php?documento=<?= $row['documento'] ?>" style="color: white; text-decoration: none;">Eliminar</a>
+                                        </button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -361,7 +367,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
 
-
         <!-- Módulo de Configuración -->
         <section class="modulo" id="configuracion">
             <div class="modulo-header">Configuración</div>
@@ -371,7 +376,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
     </main>
-
 </body>
 <script src="../assets/js/code.js"></script>
 
