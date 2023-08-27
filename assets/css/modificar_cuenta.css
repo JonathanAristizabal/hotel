@@ -1,14 +1,12 @@
 /* Estilos generales */
-/* Utilizar la fuente Roboto */
 body, header, footer {
   font-family: "Roboto", sans-serif;
-}
-
-body {
   margin: 0;
   padding: 0;
+  background-color: #e4e9f8;
 }
 
+/* Encabezado */
 header {
   background-color: #34495e;
   color: #fff;
@@ -18,31 +16,92 @@ header {
   padding: 10px;
 }
 
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* Navegación */
 nav {
   text-align: center;
 }
 
 nav ul {
   list-style: none;
-  display: inline-block; /* Cambia la visualización a "inline-block" */
   margin: 0;
-  padding: 10px 0px 15px 0px;
+  padding: 0;
 }
 
 nav ul li {
-  display: inline; /* Muestra los elementos de navegación en línea */
-  margin-right: 20px; /* Espacio entre los elementos de navegación */
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
 }
 
 nav ul li a {
   text-decoration: none;
   color: #fff;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #919191;
+  color: #34495e;
 }
 
+/* Contenido principal */
 main {
   padding: 20px;
+}
+
+/* Formulario de modificación de usuario */
+section {
+  max-width: 40%;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Estilos para el contenedor div */
+div.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Estilos para el botón de enviar */
+button[type="submit"] {
+  background-color: #34495e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #2c3e50;
 }

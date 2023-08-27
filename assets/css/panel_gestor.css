@@ -175,26 +175,28 @@ footer {
 }
 
 /* Estilos para la sección de consultas */
-#consultar {
-  text-align: center;
-  background-color: #f9f9f9; /* Cambia el color de fondo de la sección */
-  padding: 20px;
-  border: 1px solid #ddd; /* Añade un borde a la sección */
-  border-radius: 5px; /* Hace que los bordes sean redondeados */
+/* Estilo para el campo de entrada de texto */
+.campo-entrada {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Estilos para el botón de consulta */
-#consulta-form button[type="submit"] {
-  background-color: #34495e; /* Cambia el color de fondo del botón */
-  color: #fff; /* Cambia el color del texto del botón a blanco */
-  padding: 10px 20px; /* Añade espacio alrededor del texto del botón */
-  border: none; /* Elimina el borde del botón */
-  border-radius: 5px; /* Hace que los bordes del botón sean redondeados */
-  cursor: pointer; /* Cambia el cursor al estilo de mano cuando se pasa sobre el botón */
-  font-weight: bold; /* Añade negrita al texto del botón */
+/* Estilo para el botón del formulario */
+.crear-button {
+  background-color: #555;
+  color: #fff;
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  text-decoration: none; /* Quitar la decoración de texto */
 }
 
-/* Estilos para el botón cuando se pasa el cursor sobre él */
-#consulta-form button[type="submit"]:hover {
-  background-color: #727272; /* Cambia el color de fondo cuando se pasa el cursor */
+.crear-button:hover {
+  background-color: #34495e;
+  color: #fff;
 }
+
