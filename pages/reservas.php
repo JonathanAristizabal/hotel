@@ -2,8 +2,9 @@
 include '../conections/conection.php'; // Incluye tu archivo de conexión a la base de datos
 
 // Consulta SQL para obtener la información de los huéspedes y sus habitaciones
-$sql = "SELECT h.*, t.tipo, t.valor_diario FROM huespedes h
-        JOIN habitaciones t ON h.habitacion = t.numero";
+$sql = "SELECT h.*, t.tipo, t.valor_diario, u.nombre, u.apellido FROM huespedes h
+        JOIN habitaciones t ON h.habitacion = t.numero
+        JOIN usuarios u ON h.documento = u.documento"; // Agregado el JOIN con la tabla de usuarios para obtener el nombre y apellido
 $result = $conn->query($sql);
 ?>
 
@@ -46,6 +47,8 @@ $result = $conn->query($sql);
                 <thead>
                     <tr>
                         <th>Documento</th>
+                        <th>Nombre</th> <!-- Cambiado el orden para que "nombre" esté después de "documento" -->
+                        <th>Apellido</th> <!-- Agregado el campo "apellido" -->
                         <th>Ticket</th>
                         <th>Fecha de Llegada</th>
                         <th>Fecha de Salida</th>
@@ -53,7 +56,7 @@ $result = $conn->query($sql);
                         <th>Habitación</th>
                         <th>Tipo de Habitación</th>
                         <th>Valor Diario</th>
-                        <th>Acciónes</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +65,8 @@ $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo '<tr>';
                             echo '<td>' . $row['documento'] . '</td>';
+                            echo '<td>' . $row['nombre'] . '</td>'; // Cambiado el orden para que "nombre" esté después de "documento"
+                            echo '<td>' . $row['apellido'] . '</td>'; // Agregado el campo "apellido"
                             echo '<td>' . $row['ticket'] . '</td>';
                             echo '<td>' . $row['fecha_checkIN'] . '</td>';
                             echo '<td>' . $row['fecha_checkOUT'] . '</td>';
@@ -76,7 +81,7 @@ $result = $conn->query($sql);
                             echo '</tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="8">No hay registros disponibles.</td></tr>';
+                        echo '<tr><td colspan="10">No hay registros disponibles.</td></tr>';
                     }
                     ?>
                 </tbody>
@@ -89,4 +94,3 @@ $result = $conn->query($sql);
 <script src="../assets/js/reservas.js"></script>
 <script src="../assets/js/filtros_reservas.js"></script>
 </html>
-

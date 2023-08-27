@@ -101,6 +101,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                 <label for="documento">Documento:</label>
                 <input type="text" id="documento" name="documento" value="<?php echo $rowHuesped['documento']; ?>" readonly>
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $rowHuesped['nombre']; ?>" readonly>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="<?php echo $rowHuesped['apellido']; ?>" readonly>
 
                 <label for="ticket">Ticket:</label>
                 <input type="text" id="ticket" name="ticket" value="<?php echo $rowHuesped['ticket']; ?>" readonly>
@@ -117,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                 <label for="habitacionActual">Habitación Actual:</label>
-                <input type="text" id="habitacionActual" name="habitacionActual" value="<?php echo $habitacion; ?>" disabled>
+                <input type="text" id="habitacionActual" name="habitacionActual" value="<?php echo $habitacion; ?>" readonly>
 
                 <label for="habitacionNueva">Seleccionar Nueva Habitación:</label>
                 <select id="habitacionNueva" name="habitacionNueva">

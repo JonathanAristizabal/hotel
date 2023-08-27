@@ -15,6 +15,8 @@ $reservaMensaje = "";
 // Cuando se envíe el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $documento = $_POST['documento'];
+    $nombre = $_POST['nombre']; // Corregido para tomar el nombre del formulario
+    $apellido = $_POST['apellido']; // Agregado el campo "apellido"
     $habitacion = $_POST['habitacion'];
     $diaLlegada = $_POST['dia_llegada'];
     $diaSalida = $_POST['dia_salida'];
@@ -29,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $diasReservados = $intervalo->days;
 
     // Consulta SQL para insertar la nueva reserva en la tabla huespedes
-    $sqlInsertReserva = "INSERT INTO huespedes (documento, ticket, habitacion, fecha_checkIN, fecha_checkOUT, dias_reservados)
-                         VALUES ('$documento', '$ticket', '$habitacion', '$diaLlegada', '$diaSalida', '$diasReservados')";
+    $sqlInsertReserva = "INSERT INTO huespedes (documento, nombre, apellido, ticket, habitacion, fecha_checkIN, fecha_checkOUT, dias_reservados)
+                         VALUES ('$documento', '$nombre', '$apellido', '$ticket', '$habitacion', '$diaLlegada', '$diaSalida', '$diasReservados')";
 
     if ($conn->query($sqlInsertReserva) === true) {
         // Actualizar estado de la habitación a ocupada (estado = 1)
@@ -84,6 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 ?>
             </select>
+            <br>
+            <label for="nombre">Nombre de usuario:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <br>
+            <label for="apellido">Apellido de usuario:</label> <!-- Agregado el campo de apellido -->
+            <input type="text" id="apellido" name="apellido" required>
             <br>
             <label for="habitacion">Habitación:</label>
             <br>

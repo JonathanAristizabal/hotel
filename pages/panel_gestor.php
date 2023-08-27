@@ -1,18 +1,47 @@
 <?php
 include '../conections/conection.php';
 
-// Consulta SQL para obtener los datos de la tabla 'usuarios'
+// Verificar si la conexión a la base de datos se realizó con éxito
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Consultas SQL para obtener los datos
 $sql_usuarios = "SELECT * FROM usuarios";
 $result_usuarios = $conn->query($sql_usuarios);
 
-// Consulta SQL para obtener los datos de la tabla 'facturaciones'
 $sql_facturaciones = "SELECT * FROM facturaciones";
 $result_facturaciones = $conn->query($sql_facturaciones);
 
-// Consulta SQL para obtener los datos de la tabla 'habitaciones'
 $sql_habitaciones = "SELECT * FROM habitaciones";
 $result_habitaciones = $conn->query($sql_habitaciones);
+
+// Inicializa $rowCliente
+$rowCliente = null;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $documento = $_POST['cedula'];
+
+    // Consulta SQL para obtener los detalles del cliente por número de documento
+    $sqlCliente = "SELECT h.*, t.tipo AS tipo_habitacion, t.valor_diario AS valor_habitacion
+                   FROM huespedes h
+                   JOIN habitaciones t ON h.habitacion = t.numero
+                   WHERE h.documento = '$documento'";
+    $resultCliente = $conn->query($sqlCliente);
+
+    if ($resultCliente === false) {
+        echo "Error en la consulta SQL: " . $conn->error;
+    } else {
+        // Comprobación de si se encontró un cliente
+        if ($resultCliente->num_rows == 1) {
+            $rowCliente = $resultCliente->fetch_assoc();
+        } else {
+            $rowCliente = false;
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,7 +54,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
 </head>
 
 <body>
-    <!-- encabezado -->
+    <!-- Encabezado -->
     <header>
         <div id="logo">
             <img src="../assets/img/logoclaro.png" alt="Logo del Hotel" width="135px" height="70px">
@@ -39,8 +68,13 @@ $result_habitaciones = $conn->query($sql_habitaciones);
             </ul>
         </nav>
     </header>
+
+
+
+
+
     <nav class="panel">
-        <!-- Menu de navegación a los módulos -->
+        <!-- Menú de navegación a los módulos -->
         <ul>
             <li class="consultar-item"><a href="#consultar" id="consultar-link">Consultar</a></li>
             <br>
@@ -53,227 +87,282 @@ $result_habitaciones = $conn->query($sql_habitaciones);
             <br>
             <br>
             <li class="configuracion-item"><a href="#configuracion" id="configuracion-link">Configuración</a></li>
-
         </ul>
     </nav>
 
     <main>
-        <!-- Módulo de consultar -->
+        <!-- Módulo de Consultar -->
         <section class="modulo" id="consultar">
-            <div class="modulo-header">Consultar</div>
+            <div class="modulo-header">Consultas</div>
             <div class="modulo-content">
-                <!-- Contenido del módulo de consultar... -->
-                <form id="consulta-form">
-                    <input type="text" id="cedula" name="cedula" placeholder="Numero de documento">
-                    <br>
-                    <br>
-                    <button type="submit">Consultar</button>
+                <form id="consulta-form" method="POST">
+                    <input type="text" id="cedula" name="cedula" placeholder="Número de documento">
+                    <button class="boton_consultar" type="submit">Consultar</button>
                 </form>
-                <div id="resultados">
-                    <!-- Aquí se mostrarán los resultados de la consulta -->
-                </div>
+                <?php
+                if ($rowCliente !== null) {
+                    if ($rowCliente === false) {
+                        echo '<div id="resultado-consulta"><p>Cliente no encontrado.</p></div>';
+                    } else {
+                        echo '<div id="resultado-consulta">';
+                        echo '<h2>Detalles del Cliente</h2>';
+                        echo '<p><strong>Nombre:</strong> ' . $rowCliente['nombre'] . ' ' . $rowCliente['apellido'] . '</p>';
+                        echo '<p><strong>Documento:</strong> ' . $rowCliente['documento'] . '</p>';
+                        echo '<p><strong>Ticket:</strong> ' . $rowCliente['ticket'] . '</p>';
+                        echo '<p><strong>Días Reservados:</strong> ' . $rowCliente['dias_reservados'] . '</p>';
+                        echo '<p><strong>Habitación:</strong> ' . $rowCliente['habitacion'] . '</p>';
+                        echo '<p><strong>Tipo de Habitación:</strong> ' . $rowCliente['tipo_habitacion'] . '</p>';
+                        echo '<p><strong>Valor Diario de la Habitación:</strong> $' . $rowCliente['valor_habitacion'] . '</p>';
+                        echo '</div>';
+                    }
+                }
+                ?>
             </div>
         </section>
+
         <!-- Módulo de Facturación -->
         <section class="modulo" id="facturacion">
             <div class="modulo-header">Facturación</div>
             <div class="modulo-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result_facturaciones->num_rows > 0) {
-                            while ($row = $result_facturaciones->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . $row['documento'] . '</td>';
-                                echo '<td>' . $row['descripcion'] . '</td>';
-                                echo '<td>' . '$' . $row['valor'] . '</td>';
-                                echo '<td>';
-                                echo '<button class="crear-button">crear</button>';
-                                echo '<button class="modificar-button">Modificar</button>';
-                                echo '<button class="eliminar-button">Eliminar</button>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="4">No hay registros disponibles.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <!-- Modulo de Habitaciones -->
-        <section class="modulo" id="habitaciones">
-            <button class="crear-button" id="btnCrearHabitacion">Crear nueva Habitación</button>
-            <div class="modulo-header">Habitaciones</div>
-            <div class="modulo-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Número</th>
-                            <th>Tipo</th>
-                            <th>Estado</th>
-                            <th>Descripción</th>
-                            <th>Valor Diario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result_habitaciones->num_rows > 0) {
-                            while ($row_habitaciones = $result_habitaciones->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . $row_habitaciones['numero'] . '</td>';
-                                echo '<td>' . $row_habitaciones['tipo'] . '</td>';
-                                echo '<td>' . ($row_habitaciones['estado'] == 1 ? 'Ocupada' : 'Disponible') . '</td>';
-                                echo '<td>' . $row_habitaciones['descripcion'] . '</td>';
-                                echo '<td>' . '$' . $row_habitaciones['valor_diario'] . '</td>';
-                                echo '<td>';
-                                echo '<button class="modificar-button"><a href="modificar_habitacion.php?numero=' . $row_habitaciones['numero'] . '">Modificar</a></button>';
-                                echo '<button class="eliminar-button"><a href="eliminar_habitacion.php?numero=' . $row_habitaciones['numero'] . '">Eliminar</a></button>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="6">No hay registros disponibles.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                <?php if ($result_facturaciones->num_rows > 0) : ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $result_facturaciones->fetch_assoc()) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $row['documento'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['descripcion'] ?>
+                                    </td>
+                                    <td>$
+                                        <?= $row['valor'] ?>
+                                    </td>
+                                    <td>
+                                        <button class="crear-button">crear</button>
+                                        <button class="modificar-button">Modificar</button>
+                                        <button class="eliminar-button">Eliminar</button>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No hay registros disponibles.</p>
+                <?php endif; ?>
             </div>
         </section>
 
-        <!-- Modulo de Huéspedes -->
+        <!-- Módulo de Habitaciones -->
+        <section class="modulo" id="habitaciones">
+            <div><button class="crear-button" id="btnCrearHabitacion">Crear nueva Habitación</button></div>
+            <br>
+            <div class="modulo-header">Habitaciones</div>
+            <div class="modulo-content">
+                <?php if ($result_habitaciones->num_rows > 0) : ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                                <th>Valor Diario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row_habitaciones = $result_habitaciones->fetch_assoc()) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $row_habitaciones['numero'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row_habitaciones['tipo'] ?>
+                                    </td>
+                                    <td>
+                                        <?= ($row_habitaciones['estado'] == 1 ? 'Ocupada' : 'Disponible') ?>
+                                    </td>
+                                    <td>
+                                        <?= $row_habitaciones['descripcion'] ?>
+                                    </td>
+                                    <td>$
+                                        <?= $row_habitaciones['valor_diario'] ?>
+                                    </td>
+                                    <td>
+                                        <button class="modificar-button" style="color: white;"><a href="modificar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
+                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No hay registros disponibles.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <!-- Módulo de Huéspedes -->
         <section class="modulo" id="huespedes">
             <div class="modulo-header">Huéspedes</div>
             <div class="modulo-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Ticket</th>
-                            <th>Días Reservados</th>
-                            <th>Habitación</th>
-                            <th>Valor Diario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Consulta SQL para obtener los datos de la tabla huespedes y habitaciones
-                        $sqlHuespedes = "SELECT h.documento, h.ticket, h.dias_reservados, h.habitacion, hab.valor_diario
-                                 FROM huespedes h
-                                 JOIN habitaciones hab ON h.habitacion = hab.numero";
-                        $resultHuespedes = $conn->query($sqlHuespedes);
-
-                        if ($resultHuespedes->num_rows > 0) {
-                            while ($rowHuespedes = $resultHuespedes->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . $rowHuespedes['documento'] . '</td>';
-                                echo '<td>' . $rowHuespedes['ticket'] . '</td>';
-                                echo '<td>' . $rowHuespedes['dias_reservados'] . '</td>';
-                                echo '<td>' . $rowHuespedes['habitacion'] . '</td>';
-                                echo '<td>' . '$' . $rowHuespedes['valor_diario'] . '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="5">No hay registros disponibles.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                <?php
+                // Consulta SQL para obtener los datos de la tabla huéspedes y habitaciones
+                $sqlHuespedes = "SELECT h.documento, h.nombre, h.apellido, h.ticket, h.dias_reservados, h.habitacion, hab.valor_diario
+         FROM huespedes h
+         JOIN habitaciones hab ON h.habitacion = hab.numero";
+                $resultHuespedes = $conn->query($sqlHuespedes);
+                if ($resultHuespedes->num_rows > 0) :
+                ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Ticket</th>
+                                <th>Días Reservados</th>
+                                <th>Habitación</th>
+                                <th>Valor Diario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($rowHuespedes = $resultHuespedes->fetch_assoc()) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $rowHuespedes['documento'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowHuespedes['nombre'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowHuespedes['apellido'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowHuespedes['ticket'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowHuespedes['dias_reservados'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowHuespedes['habitacion'] ?>
+                                    </td>
+                                    <td>$
+                                        <?= $rowHuespedes['valor_diario'] ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No hay registros disponibles.</p>
+                <?php endif; ?>
             </div>
         </section>
 
         <!-- Módulo de Pedidos -->
         <section class="modulo" id="pedidos">
-            <button class="crear-button" id="btnCrearPedido">Crear nuevo Pedido</button>
+            <div><button class="crear-button" id="btnCrearPedido">Crear nuevo Pedido</button></div>
+            <br>
             <div class="modulo-header">Pedidos</div>
             <div class="modulo-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                            <th>Habitación</th>
-                            <th>Ticket</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Consulta SQL para obtener información de pedidos
-                        $sqlPedidos = "SELECT p.documento, p.descripcion, p.valor, p.habitacion, h.ticket
-                               FROM pedidos p
-                               LEFT JOIN huespedes h ON p.documento = h.documento";
-
-                        $resultPedidos = $conn->query($sqlPedidos);
-
-                        if ($resultPedidos->num_rows > 0) {
-                            while ($rowPedido = $resultPedidos->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . $rowPedido['documento'] . '</td>';
-                                echo '<td>' . $rowPedido['descripcion'] . '</td>';
-                                echo '<td>' . $rowPedido['valor'] . '</td>';
-                                echo '<td>' . $rowPedido['habitacion'] . '</td>';
-                                echo '<td>' . $rowPedido['ticket'] . '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="5">No hay pedidos disponibles.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                <?php
+                // Consulta SQL para obtener información de pedidos
+                $sqlPedidos = "SELECT p.documento, p.descripcion, p.valor, p.habitacion, h.ticket
+                   FROM pedidos p
+                   LEFT JOIN huespedes h ON p.documento = h.documento";
+                $resultPedidos = $conn->query($sqlPedidos);
+                if ($resultPedidos->num_rows > 0) :
+                ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Habitación</th>
+                                <th>Ticket</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($rowPedido = $resultPedidos->fetch_assoc()) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $rowPedido['documento'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['descripcion'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['valor'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['habitacion'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['ticket'] ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No hay pedidos disponibles.</p>
+                <?php endif; ?>
             </div>
         </section>
+
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
-            <button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button>
+            <div><button class="crear-button" id="btnCrearUsuario">Crear nuevo Usuario</button></div>
+            <br>
             <div class="modulo-header">Usuarios</div>
             <div class="modulo-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result_usuarios->num_rows > 0) {
-                            while ($row = $result_usuarios->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . $row['documento'] . '</td>';
-                                echo '<td>' . $row['nombre'] . '</td>';
-                                echo '<td>' . $row['apellido'] . '</td>';
-                                echo '<td>' . $row['correo'] . '</td>';
-                                echo '<td>' . $row['telefono'] . '</td>';
-                                echo '<td>';
-                                echo '<td>';
-                                echo '<button class="modificar-button"><a href="modificar_cuenta.php?documento=' . $row['documento'] . '">Modificar</a></button>';
-                                echo '<button class="eliminar-button"><a href="eliminar_cuenta.php?documento=' . $row['documento'] . '">Eliminar</a></button>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="4">No hay registros disponibles.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                <?php if ($result_usuarios->num_rows > 0) : ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <!-- Agregamos un encabezado para la última columna -->
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $result_usuarios->fetch_assoc()) : ?>
+                                <tr>
+                                    <td><?= $row['documento'] ?></td>
+                                    <td><?= $row['nombre'] ?></td>
+                                    <td><?= $row['apellido'] ?></td>
+                                    <td><?= $row['correo'] ?></td>
+                                    <td><?= $row['telefono'] ?></td>
+                                    <td>
+                                        <button class="modificar-button" style="color: white;"><a href="modificar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
+                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_habitacion.php?numero=<?= $row_habitaciones['numero'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No hay registros disponibles.</p>
+                <?php endif; ?>
             </div>
         </section>
+
+
         <!-- Módulo de Configuración -->
         <section class="modulo" id="configuracion">
             <div class="modulo-header">Configuración</div>
@@ -284,10 +373,6 @@ $result_habitaciones = $conn->query($sql_habitaciones);
         </section>
     </main>
 
-    <!-- Pie de página del panel de gestión -->
-    <footer>
-        <p>&copy; 2023 Panel de Gestión. Todos los derechos reservados.</p>
-    </footer>
 </body>
 <script src="../assets/js/code.js"></script>
 

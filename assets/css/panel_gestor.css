@@ -1,15 +1,11 @@
-/* Estilos para la barra de navegación principal */
-
-/* Utilizar la fuente Roboto */
+/* Estilos generales */
 body, header, footer {
   font-family: "Roboto", sans-serif;
-}
-
-body {
   margin: 0;
   padding: 0;
 }
 
+/* Estilos para el encabezado */
 header {
   background-color: #34495e;
   color: #fff;
@@ -20,13 +16,9 @@ header {
 }
 
 nav.navegacion {
-  color: #fff;
+  color: #34495e;
   padding: 10px;
-  text-align: right; /* Alinea el texto a la derecha */
-}
-
-nav ul li a:hover {
-  color: #27ae60;
+  text-align: right;
 }
 
 nav ul {
@@ -35,144 +27,129 @@ nav ul {
 }
 
 nav ul li {
+  background-color: #34495e;
   font-size: 16px;
   padding: 0px 0px 0px 10px;
   text-align: center;
-  margin-bottom: 10px; /* Espaciado vertical entre los enlaces */
-  width: 140px; /* Ancho fijo para todos los elementos de la lista */
-  display: inline-block; /* Hace que los elementos estén en línea y no se apilen */
+  margin-bottom: 10px;
+  border-radius: 4px;
+  width: 140px;
+  display: inline-block;
 }
 
-/* Estilos para los elementos de la lista comunes */
 nav ul li a {
   text-decoration: none;
   display: block;
   padding: 8px 0px 8px 0px;
   border-radius: 8px;
-  transition: background-color 0.3s ease; /* Efecto de transición */
-  color: #ffffff;
-}
-
-/* Estilo para otros elementos de la lista (Facturación, Habitaciones, Huéspedes, Pedidos, Usuarios) */
-li.facturacion-item a,
-li.habitaciones-item a,
-li.huespedes-item a,
-li.pedidos-item a,
-li.usuarios-item a {
-  background-color: #34495e;
+  transition: background-color 0.3s ease;
   color: #ffffff;
 }
 
 nav ul li a:hover {
-  color: #95a5a6;
+  color: #969696;
 }
 
-/* Estilo para el botón "Consultar y configuracion" */
-li.consultar-item a,
-li.configuracion-item a {
-  background-color: #6a6b6b;
-  color: #ffffff;
+/* Estilos para las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  margin-bottom: 20px; /* Espacio entre tablas */
 }
 
-/* Estilo para el botón "Consultar y configuracion" */
-li.consultar-item a:hover,
-li.configuracion-item a:hover {
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Estilos para los botones en las tablas */
+table button {
+  background-color: #555;
+  color: white; /* Cambiamos el color del texto a blanco */
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+  text-decoration: none; /* Quitar la decoración de texto */
+}
+
+table button:hover {
   background-color: #34495e;
-  color: #95a5a6;
-  transform: scale(1.05); /* Escala el servicio al 105% al hacer hover */
+  color: white; /* Cambiamos el color del texto a blanco al pasar el cursor */
 }
 
-li.facturacion-item a:hover,
-li.habitaciones-item a:hover,
-li.huespedes-item a:hover,
-li.pedidos-item a:hover,
-li.usuarios-item a:hover {
-  transform: scale(1.05); /* Escala el servicio al 105% al hacer hover */
+/* Estilo específico para los botones en las tablas de módulos */
+.modulo table button {
+  padding: 6px 12px;
 }
 
-/* Estilos para el menú de navegación */
+/* Estilos para los botones de crear, Modificar y Eliminar fuera de las tablas */
+.crear-button, .modificar-button, .eliminar-button {
+  background-color: #555;
+  color: white; /* Cambiamos el color del texto a blanco */
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: none; /* Quitar la decoración de texto */
+}
+
+.crear-button:hover, .modificar-button:hover, .eliminar-button:hover {
+  background-color: #34495e;
+  color: white; /* Cambiamos el color del texto a blanco al pasar el cursor */
+}
+
+/* Estilos para la barra de navegación lateral */
 nav.panel {
   padding: 30px 10px 10px 10px;
   width: 200px;
-  position: fixed; /* Para que la barra de navegación sea fija en la página */
-  height: 100%; /* Ocupa toda la altura del viewport */
+  position: fixed;
+  height: 100%;
 }
 
 /* Estilos para los módulos */
 main {
-  margin-left: 220px; /* Deja espacio para la barra de navegación */
-  padding: 10px 80px 10px 80px;
+  margin-left: 220px;
+  padding: 20px 50px 0px 0px;
 }
 
 .modulo {
-  background-color: #f4f4f4;
+  background-color: #f1f1f1;
   margin: 20px;
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 5px;
   flex: 1;
-  width: calc(100% - 40px); /* Ajusta el ancho de los módulos */
-  text-align: center;
+  width: calc(100% - 40px);
 }
 
 .modulo-header {
   background-color: #555;
   color: #fff;
   padding: 5px;
+  text-align: center;
 }
 
 .modulo-content {
   padding: 10px;
 }
 
-/* Estilos para los botones de crear, Modificar y Eliminar */
-.crear-button,
-.modificar-button,
-.eliminar-button {
-  background-color: #555;
-  color: #fff;
-  padding: 8px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  border-radius: 5px;
-  display: inline-block; /* Cambia a "inline-block" para que los botones estén en línea */
-  margin-right: 10px; /* Espaciado derecho entre los botones */
-}
-
-.crear-button:hover,
-.modificar-button:hover,
-.eliminar-button:hover {
-  background-color: #34495e; /* Cambia el color al pasar el mouse */
-}
-
-/* Boton consultar */
-
-button {
-  background-color: #555;
-  color: #fff;
-  padding: 8px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  border-radius: 5px;
-  display: block; /* Hace que el botón sea un bloque en lugar de en línea */
-  margin: 0 auto; /* Centra el botón horizontalmente */
-}
-
-button:hover {
-  background-color: #34495e; /* Cambia el color al pasar el mouse */
-}
-
 /* Estilos para el pie de página */
 footer {
   background-color: #34495e;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   padding: 10px;
   clear: both;
-  position: fixed; /* Fija el pie de página en la parte inferior */
-  bottom: 0; /* Lo coloca en la parte inferior de la ventana */
-  width: 100%; /* Ocupa todo el ancho de la ventana */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 /* Estilos generales de la ventana modal */
@@ -195,4 +172,29 @@ footer {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
+}
+
+/* Estilos para la sección de consultas */
+#consultar {
+  text-align: center;
+  background-color: #f9f9f9; /* Cambia el color de fondo de la sección */
+  padding: 20px;
+  border: 1px solid #ddd; /* Añade un borde a la sección */
+  border-radius: 5px; /* Hace que los bordes sean redondeados */
+}
+
+/* Estilos para el botón de consulta */
+#consulta-form button[type="submit"] {
+  background-color: #34495e; /* Cambia el color de fondo del botón */
+  color: #fff; /* Cambia el color del texto del botón a blanco */
+  padding: 10px 20px; /* Añade espacio alrededor del texto del botón */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 5px; /* Hace que los bordes del botón sean redondeados */
+  cursor: pointer; /* Cambia el cursor al estilo de mano cuando se pasa sobre el botón */
+  font-weight: bold; /* Añade negrita al texto del botón */
+}
+
+/* Estilos para el botón cuando se pasa el cursor sobre él */
+#consulta-form button[type="submit"]:hover {
+  background-color: #727272; /* Cambia el color de fondo cuando se pasa el cursor */
 }

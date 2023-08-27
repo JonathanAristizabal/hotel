@@ -84,44 +84,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Crear Cuenta</h2>
         <form action="" method="post">
             <div class="form-group">
-                <label for="documento">Numero de documento:</label>
-                <input type="text" id="documento" name="documento" required>
+                <label for="documento"></label>
+                <input type="text" id="documento" name="documento" required placeholder="Numero de documento">
             </div>
             <div class="form-group">
-                <label for="email">Ingrese un Correo electrónico:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email"></label>
+                <input type="email" id="email" name="email" required placeholder="Correo electrónico">
             </div>
             <div class=" form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <label for="nombre"></label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Nombre">
             </div>
             <div class="form-group">
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
+                <label for="apellido"></label>
+                <input type="text" id="apellido" name="apellido" required placeholder="Apellido">
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
+                <label for="telefono"></label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="Teléfono">
             </div>
             <div class="form-group">
-                <label for="pais">Pais:</label>
-                <input type="text" id="pais" name="pais" required>
+                <label for="pais"></label>
+                <input type="text" id="pais" name="pais" required placeholder="Pais">
             </div>
             <div class="form-group">
-                <label for="departamento">Departamento:</label>
-                <input type="text" id="departamento" name="departamento" required>
+                <label for="departamento"></label>
+                <input type="text" id="departamento" name="departamento" required placeholder="Departamento">
             </div>
             <div class="form-group">
-                <label for="ciudad">Ciudad:</label>
-                <input type="text" id="ciudad" name="ciudad" required>
+                <label for="ciudad"></label>
+                <input type="text" id="ciudad" name="ciudad" required placeholder="Ciudad">
             </div>
             <div class="form-group">
-                <label for="contrasena">Ingrese una Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <label for="contrasena"></label>
+                <input type="password" id="contrasena" name="contrasena" required placeholder="Ingrese una Contraseña">
             </div>
             <div class="form-group">
-                <label for="contrasena">Confirme su Contraseña:</label>
-                <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
+                <label for="contrasena"></label>
+                <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required placeholder="Confirme su Contraseña">
             </div>
             <br>
             <div class="form-group">

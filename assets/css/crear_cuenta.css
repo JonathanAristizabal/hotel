@@ -1,14 +1,11 @@
-/* Estilos generales */
-/* Utilizar la fuente Roboto */
+/* Estilos Globales */
 body, header, footer {
     font-family: "Roboto", sans-serif;
-  }
-
-body {
     margin: 0;
     padding: 0;
 }
 
+/* Estilos del Encabezado */
 header {
     background-color: #34495e;
     display: flex;
@@ -17,23 +14,16 @@ header {
     padding: 10px;
 }
 
-nav {
-    text-align: center;
-}
-
 nav ul {
     list-style: none;
     display: inline-block;
-    /* Cambia la visualización a "inline-block" */
     margin: 0;
     padding: 10px 0px 15px 0px;
 }
 
 nav ul li {
     display: inline;
-    /* Muestra los elementos de navegación en línea */
     margin-right: 20px;
-    /* Espacio entre los elementos de navegación */
 }
 
 nav ul li a {
@@ -41,38 +31,31 @@ nav ul li a {
     color: #fcfcfc;
 }
 
-nav ul li :hover {
+nav ul li a:hover {
     color: #919191;
 }
 
+/* Estilos del Contenido Principal */
 main {
     padding: 20px;
 }
 
-/* Estilos para el formulario de contacto */
-
+/* Estilos del Formulario de Contacto */
 #formulario {
+    
     background-color: hsl(210, 29%, 29%);
-    /* Color de fondo */
-    padding: 30px 0px 30px 0px;
+    padding: 10px;
     border-radius: 10px;
-    /* Bordes redondeados */
     text-align: center;
-    /* Centra el contenido horizontalmente */
     margin: 0 auto;
-    /* Centra el contenedor en la página */
     max-width: 500px;
-    /* Define un ancho máximo para el contenedor */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Agrega una sombra */
 }
 
 #formulario h2 {
     font-size: 22px;
-    color: #ffffff;
-    /* Color del título */
+    color: #fff;
     margin-bottom: 20px;
-    /* Espacio inferior */
 }
 
 form {
@@ -81,9 +64,8 @@ form {
 
 label {
     display: block;
-    font-size: 16px;
-    color: #ffffff;
-    /* Color del texto de etiqueta */
+    font-size: 14px;
+    color: #fff;
     margin-bottom: 5px;
 }
 
@@ -92,29 +74,24 @@ input[type="password"],
 input[type="email"],
 input[type="tel"],
 textarea {
-    width: 70%;
-    padding: 5px 5px 5px 5px;
+    width: 75%;
+    padding: 5px;
     margin-bottom: 10px;
-    /* Espacio inferior */
     border: 1px solid #ccc;
-    /* Borde ligero */
     border-radius: 5px;
-    /* Bordes redondeados */
-    font-size: 16px;
+    font-size: 14px;
 }
 
 textarea {
     resize: vertical;
-    /* Permite redimensionar verticalmente */
 }
 
-/* Estilos para los elementos ul dentro del formulario */
+/* Estilos de las Listas dentro del Formulario */
 #formulario ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     text-align: center;
-    /* Para centrar los elementos ul */
 }
 
 #formulario ul li {
@@ -122,7 +99,7 @@ textarea {
     margin-right: 20px;
 }
 
-#formulario ul li {
+#formulario ul li a {
     text-decoration: none;
     color: #fff;
 }
@@ -132,42 +109,26 @@ textarea {
     color: #6e6e6e;
 }
 
-/* Estilo para el botón de iniciar sesion */
-
+/* Estilos del Botón de Iniciar Sesión */
 .form-group input[type="submit"] {
     font-size: 14px;
     background-color: #3a3a3a;
-    /* Color de fondo del botón */
-    color: white;
-    /* Color del texto del botón */
-    padding: 5px 10px 5px 10px;
-    /* Espaciado interno del botón (ajústalo según tus preferencias) */
+    color: #fff;
+    padding: 5px 10px;
     border: none;
-    /* Sin borde */
     border-radius: 5px;
-    /* Bordes redondeados */
     cursor: pointer;
-    /* Cambiar el cursor al pasar sobre el botón */
-
 }
-
-/* Estilo para cambiar el color del botón al pasar el cursor */
 
 .form-group input[type="submit"]:hover {
     background-color: #5c5c5c;
-    /* Color de fondo del botón al pasar el cursor */
 }
 
-
-/* Estilos para el pie de página */
+/* Estilos del Pie de Página */
 footer {
     background-color: #333;
     color: #fff;
-    padding: 5px 5px 5px 5px;
-}
-
-#info-contacto {
-    margin-top: 10px;
+    padding: 5px;
 }
 
 footer p {
@@ -178,10 +139,16 @@ footer p {
 .derechos-reservados {
     font-size: 14px;
     text-align: center;
-    padding: 5px 0px 0px 0px;
+    padding: 5px;
 }
 
 .ul-pie {
     font-size: 14px;
-    text-decoration: underline rgb(255, 255, 255);
+    text-decoration: underline;
+    color: #fff;
+}
+
+/* Centrar el Texto del Placeholder */
+.form-group input::placeholder {
+    text-align: center;
 }
