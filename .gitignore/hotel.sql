@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-08-2023 a las 20:21:04
+-- Tiempo de generación: 27-08-2023 a las 09:11:24
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,13 +52,11 @@ CREATE TABLE `habitaciones` (
 --
 
 INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_diario`) VALUES
-(1, 'Individual', 0, 'asdfvg', 45000),
-(2, 'Doble', 0, 'sdfg', 70000),
-(3, 'Suite', 0, 'rtbyyw', 150000),
+(1, 'Individual', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing', 50000),
+(2, 'Doble', 1, 'sdfg', 70000),
+(3, 'Suite', 1, 'rtbyyw', 150000),
 (4, 'Suite', 0, 'qqqqqqqqqqq', 60000),
-(5, 'Doble', 0, 'lctm', 50000),
-(6, 'Suite', 0, 'ijijijij', 150000),
-(7, 'Doble', 0, 'eeeeéeeee', 50000);
+(5, 'Doble', 0, 'lctm', 50000);
 
 -- --------------------------------------------------------
 
@@ -68,12 +66,23 @@ INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_di
 
 CREATE TABLE `huespedes` (
   `documento` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
   `ticket` varchar(11) NOT NULL,
   `habitacion` int(11) NOT NULL,
   `fecha_checkIN` date NOT NULL,
   `fecha_checkOUT` date NOT NULL,
   `dias_reservados` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `huespedes`
+--
+
+INSERT INTO `huespedes` (`documento`, `nombre`, `apellido`, `ticket`, `habitacion`, `fecha_checkIN`, `fecha_checkOUT`, `dias_reservados`) VALUES
+(1053810807, 'Jonathan', 'Aristizabal', '647AMY', 1, '2023-08-28', '2023-08-30', 2),
+(1053872476, 'Jeimy', 'prueba', 'TSMDOA', 2, '2023-08-23', '2023-08-23', 0),
+(30324221, 'segunda', 'prueba', 'G1XJ7K', 3, '2023-08-28', '2023-08-30', 2);
 
 -- --------------------------------------------------------
 
@@ -131,9 +140,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`documento`, `correo`, `nombre`, `apellido`, `telefono`, `pais`, `departamento`, `ciudad`, `contrasena`, `tipoUsuarioId`) VALUES
-(30324221, 'ayne@gmail.com', 'Ayne', 'Tapia', '3165306359', 'Colombia', 'Caldas', 'Manizales', '$2y$10$7bfGQjA..Tcdgs5H58PeteB1Mt0leN4iHiG06fEOFM0OqRPFtTawW', 0),
-(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', 'Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 0),
-(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy', ' Pinto', '3058122481', 'Colombia', 'Caldas', 'Manizales', '$2y$10$NnuvT.hwhIpTkbC419xeDOHNtZN/Gpu4j/KhyfCO2OKxXYjF846D6', 0);
+(30324221, 'ayne@gmail.com', 'Ayne', ' Tapia', '3165306359', 'Colombia', 'Caldas', 'Manizales', '$2y$10$7bfGQjA..Tcdgs5H58PeteB1Mt0leN4iHiG06fEOFM0OqRPFtTawW', 0),
+(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', '  Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 0),
+(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy', '  Pinto', '3058122481', 'Colombia', 'Caldas', 'Manizales', '$2y$10$NnuvT.hwhIpTkbC419xeDOHNtZN/Gpu4j/KhyfCO2OKxXYjF846D6', 0);
 
 --
 -- Índices para tablas volcadas
