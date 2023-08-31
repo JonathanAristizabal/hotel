@@ -216,9 +216,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="modulo-content">
                 <?php
                 // Consulta SQL para obtener los datos de la tabla huéspedes y habitaciones
-                $sqlHuespedes = "SELECT h.documento, h.nombre, h.apellido, h.ticket, h.dias_reservados, h.habitacion, hab.valor_diario
-         FROM huespedes h
-         JOIN habitaciones hab ON h.habitacion = hab.numero";
+                $sqlHuespedes = "SELECT  h.documento, h.ticket, h.dias_reservados, h.habitacion, hab.valor_diario, u.nombre, u.apellido
+                FROM huespedes h
+                JOIN habitaciones hab ON h.habitacion = hab.numero
+                JOIN usuarios u ON h.documento = u.documento";
                 $resultHuespedes = $conn->query($sqlHuespedes);
                 if ($resultHuespedes->num_rows > 0) :
                 ?>
@@ -237,27 +238,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <tbody>
                             <?php while ($rowHuespedes = $resultHuespedes->fetch_assoc()) : ?>
                                 <tr>
-                                    <td>
-                                        <?= $rowHuespedes['documento'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $rowHuespedes['nombre'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $rowHuespedes['apellido'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $rowHuespedes['ticket'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $rowHuespedes['dias_reservados'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $rowHuespedes['habitacion'] ?>
-                                    </td>
-                                    <td>$
-                                        <?= $rowHuespedes['valor_diario'] ?>
-                                    </td>
+                                    <td><?= $rowHuespedes['documento'] ?></td>
+                                    <td><?= $rowHuespedes['nombre'] ?></td>
+                                    <td><?= $rowHuespedes['apellido'] ?></td>
+                                    <td><?= $rowHuespedes['ticket'] ?></td>
+                                    <td><?= $rowHuespedes['dias_reservados'] ?></td>
+                                    <td><?= $rowHuespedes['habitacion'] ?></td>
+                                    <td>$<?= $rowHuespedes['valor_diario'] ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
