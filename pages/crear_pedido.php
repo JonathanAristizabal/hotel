@@ -2,35 +2,36 @@
 include '../conections/conection.php'; // Incluye tu archivo de conexión a la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $documentoTicket = $_POST['documento'];
+    $documento = $_POST['documento'];
     $descripcion = $_POST['descripcion'];
     $valor = $_POST['valor'];
 
-    // Obtener el número de habitación a partir del documento y ticket
-    $sqlHabitacion = "SELECT habitacion FROM huespedes WHERE documento = '$documentoTicket' AND ticket = '$ticket'";
-    $resultHabitacion = $conn->query($sqlHabitacion);
-
-    if ($resultHabitacion->num_rows == 1) {
-        $rowHabitacion = $resultHabitacion->fetch_assoc();
-        $habitacion = $rowHabitacion['habitacion'];
+    // Consulta SQL para obtener el ticket y la habitación a partir del documento
+    $sql = "SELECT ticket, habitacion FROM huespedes WHERE documento = '$documento'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        $ticket = $row['ticket'];
+        $habitacion = $row['habitacion'];
 
         // Consulta SQL para insertar el nuevo pedido en la tabla de pedidos
         $sqlInsertPedido = "INSERT INTO pedidos (documento, descripcion, valor, habitacion)
-                            VALUES ('$documentoTicket', '$descripcion', '$valor', '$habitacion')";
+                            VALUES ('$documento', '$descripcion', '$valor', '$habitacion')";
 
         if ($conn->query($sqlInsertPedido) === true) {
             echo '<script>
                     alert("Pedido creado con éxito.");
-                    // Puedes redirigir a una página de confirmación o hacer alguna otra acción
                  </script>';
         } else {
             echo "Error al crear el pedido: " . $conn->error;
         }
     } else {
-        echo "No se encontró el huésped correspondiente al documento y ticket.";
+        echo "Huésped no encontrado.";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -70,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </select>
+
         <br>
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>

@@ -262,10 +262,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="modulo-header">Pedidos</div>
             <div class="modulo-content">
                 <?php
-                // Consulta SQL para obtener información de pedidos
-                $sqlPedidos = "SELECT p.documento, p.descripcion, p.valor, p.habitacion, h.ticket
-                   FROM pedidos p
-                   LEFT JOIN huespedes h ON p.documento = h.documento";
+                // Consulta SQL para obtener información de pedidos con nombre y apellido de usuarios
+                $sqlPedidos = "SELECT p.documento, u.nombre, u.apellido, p.descripcion, p.valor, p.habitacion, h.ticket
+           FROM pedidos p
+           LEFT JOIN huespedes h ON p.documento = h.documento
+           LEFT JOIN usuarios u ON p.documento = u.documento";
                 $resultPedidos = $conn->query($sqlPedidos);
                 if ($resultPedidos->num_rows > 0) :
                 ?>
@@ -273,10 +274,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <thead>
                             <tr>
                                 <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
                                 <th>Descripción</th>
                                 <th>Valor</th>
                                 <th>Habitación</th>
                                 <th>Ticket</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -284,6 +288,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <tr>
                                     <td>
                                         <?= $rowPedido['documento'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['nombre'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $rowPedido['apellido'] ?>
                                     </td>
                                     <td>
                                         <?= $rowPedido['descripcion'] ?>
@@ -297,6 +307,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td>
                                         <?= $rowPedido['ticket'] ?>
                                     </td>
+                                    <td>
+                                        <button class="modificar-button" style="color: white;"><a href="modificar_pedido.php?ticket= <?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
+                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_pedido.php?ticket= <?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
+                                    </td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
@@ -306,6 +320,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endif; ?>
             </div>
         </section>
+
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
