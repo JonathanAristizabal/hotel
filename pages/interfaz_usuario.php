@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paradise Hotel & Resort</title>
     <link rel="shortcut icon" href="icon-ordenador.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/interfaz_usuario.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
     <header>
       <nav>
         <a href="#">Inicio</a>
-        <a href="reservas_usuario.html">Reservas</a>
+        <a href="../pages/reservas_pag_usuario.php">Reservas</a>
         <a href="#">Habitaciones</a>
         <a href="#">Servicios</a>
         <a href="#">Contacto</a>
@@ -43,11 +43,7 @@
       <section class="contenedor sobre-nosotros">
         <h2 class="titulo2">Disfruta nuestros servicios</h2>
         <div class="contenedor-sobre-nosotros">
-          <img
-            src="playa.jpg"
-            alt="Playa paradisiaca"
-            class="imagen-about-us"
-          />
+          <img src="../assets/img/playa.jpg" alt="Playa paradisiaca" class="imagen-about-us"/>
           <div class="contenido-textos">
             <h3><span>1</span>Habitaciones de ensueño</h3>
             <p>
@@ -75,28 +71,28 @@
           <h2 class="titulo">Galería de Fotos</h2>
           <div class="galeria-port">
             <div class="imagen-port">
-              <img src="11.jpg" alt="Piscina del hotel" />
+              <img src="../assets/img/suite.jpg" alt="Piscina del hotel" />
               <div class="hover-galeria">
                 <img src="icon1.png" alt="Icono de estrella" />
                 <p>Relájate en nuestra piscina</p>
               </div>
             </div>
             <div class="imagen-port">
-              <img src="22.jpg" alt="Spa del hotel" />
+              <img src="../assets/img/suite1.jpg" alt="Spa del hotel" />
               <div class="hover-galeria">
                 <img src="icon1.png" alt="Icono de estrella" />
                 <p>Spa de clase mundial</p>
               </div>
             </div>
             <div class="imagen-port">
-              <img src="33.jpg" alt="Spa del hotel" />
+              <img src="../assets/img/suite2.jpg" alt="Spa del hotel" />
               <div class="hover-galeria">
                 <img src="icon1.png" alt="Icono de estrella" />
                 <p>Spa de clase mundial</p>
               </div>
             </div>
             <div class="imagen-port">
-              <img src="44.jpg" alt="Spa del hotel" />
+              <img src="../assets/img/suite3.jpg" alt="Spa del hotel" />
               <div class="hover-galeria">
                 <img src="icon1.png" alt="Icono de estrella" />
                 <p>Spa de clase mundial</p>

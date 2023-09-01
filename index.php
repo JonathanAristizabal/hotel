@@ -19,6 +19,7 @@
             <ul class="ul-encabezado">
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="./pages/login.php">Login</a></li>
+                <li><a href="./pages/interfaz_usuario.php">Home Usuario</a></li>
             </ul>
         </nav>
     </header>

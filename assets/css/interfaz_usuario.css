@@ -34,8 +34,8 @@ header{
     width: 100%;
     height: 600px;
     background: #1e6ba2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(59, 100%, 50%, 0.308)), url(portada.jpg);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(56, 100%, 50%, 0.171)), url(portada.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(59, 100%, 50%, 0.308)), url(../img/portada.jpg);
+    background: linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(56, 100%, 50%, 0.171)), url(../img/portada.jpg);
     background-size: cover;
     background-attachment: fixed;
     position: relative;
