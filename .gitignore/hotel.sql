@@ -91,11 +91,14 @@ INSERT INTO `huespedes` (`documento`, `nombre`, `apellido`, `ticket`, `habitacio
 --
 
 CREATE TABLE `pedidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `documento` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
-  `habitacion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `habitacion` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 

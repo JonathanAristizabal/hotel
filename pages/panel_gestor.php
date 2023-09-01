@@ -308,8 +308,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <?= $rowPedido['ticket'] ?>
                                     </td>
                                     <td>
-                                        <button class="modificar-button" style="color: white;"><a href="modificar_pedido.php?ticket= <?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
-                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_pedido.php?ticket= <?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
+                                        <button class="modificar-button" style="color: white;"><a href="modificar_pedido.php?ticket=<?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Modificar</a></button>
+                                        <button class="eliminar-button" style="color: white;"><a href="eliminar_pedido.php?ticket=<?= $rowPedido['ticket'] ?>" style="color: white; text-decoration: none;">Eliminar</a></button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

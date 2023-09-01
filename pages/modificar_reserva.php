@@ -5,9 +5,11 @@ if (isset($_GET['ticket'])) {
     $ticket = $_GET['ticket'];
 
     // Consulta SQL para obtener los datos del huésped por el ticket
-    $sqlHuesped = "SELECT h.*, t.tipo, t.valor_diario FROM huespedes h
-                   JOIN habitaciones t ON h.habitacion = t.numero
-                   WHERE h.ticket = '$ticket'";
+    $sqlHuesped = "SELECT h.*, u.nombre, u.apellido, t.tipo, t.valor_diario FROM huespedes h
+JOIN habitaciones t ON h.habitacion = t.numero
+JOIN usuarios u ON h.documento = u.documento
+WHERE h.ticket = '$ticket'";
+
     $resultHuesped = $conn->query($sqlHuesped);
 
     if ($resultHuesped->num_rows == 1) {
@@ -34,6 +36,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $intervalo = $fechaLlegada->diff($fechaSalida);
     $diasReservados = $intervalo->days;
 
+    //Validar que la fecha de llegada y salida sean correctas
+    $fechaActual = new DateTime();
+    if ($fechaLlegada < $fechaActual) {
+        // La fecha de llegada es anterior a la fecha actual, mostrar un mensaje de error
+        echo "<script>
+        alert('La fecha de llegada no puede ser anterior a la fecha actual');
+        window.location.href = 'reservas.php';
+      </script>";
+        exit(); // Detener la ejecución
+    }
+    if ($fechaSalida < $fechaLlegada) {
+        // La fecha de llegada es anterior a la fecha actual, mostrar un mensaje de error
+        echo "<script>
+        alert('La fecha de salida no puede ser anterior a la fecha de llegada');
+        window.location.href = 'reservas.php';
+      </script>";
+        exit(); // Detener la ejecución
+    }
     // Obtener la habitación actual del huésped
     $habitacionActual = $rowHuesped['habitacion'];
 
@@ -99,46 +119,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="modulo-content">
             <form action="" method="POST">
                 <div>
-                <label for="documento">Documento:</label>
-                <input type="text" id="documento" name="documento" value="<?php echo $rowHuesped['documento']; ?>" readonly>
-                
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $rowHuesped['nombre']; ?>" readonly>
+                    <label for="documento">Documento:</label>
+                    <input type="text" id="documento" name="documento" value="<?php echo $rowHuesped['documento']; ?>" readonly>
 
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" value="<?php echo $rowHuesped['apellido']; ?>" readonly>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="<?php echo $rowHuesped['nombre']; ?>" readonly>
 
-                <label for="ticket">Ticket:</label>
-                <input type="text" id="ticket" name="ticket" value="<?php echo $rowHuesped['ticket']; ?>" readonly>
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" value="<?php echo $rowHuesped['apellido']; ?>" readonly>
+
+                    <label for="ticket">Ticket:</label>
+                    <input type="text" id="ticket" name="ticket" value="<?php echo $rowHuesped['ticket']; ?>" readonly>
                 </div>
                 <div>
-                <label for="nueva_fecha_llegada">Nueva Fecha de Llegada:</label>
-                <input type="date" id="nueva_fecha_llegada" name="nueva_fecha_llegada" value="<?php echo $rowHuesped['fecha_checkIN']; ?>" required>
+                    <label for="nueva_fecha_llegada">Nueva Fecha de Llegada:</label>
+                    <input type="date" id="nueva_fecha_llegada" name="nueva_fecha_llegada" value="<?php echo $rowHuesped['fecha_checkIN']; ?>" required>
 
-                <label for="nueva_fecha_salida">Nueva Fecha de Salida:</label>
-                <input type="date" id="nueva_fecha_salida" name="nueva_fecha_salida" value="<?php echo $rowHuesped['fecha_checkOUT']; ?>" required>
+                    <label for="nueva_fecha_salida">Nueva Fecha de Salida:</label>
+                    <input type="date" id="nueva_fecha_salida" name="nueva_fecha_salida" value="<?php echo $rowHuesped['fecha_checkOUT']; ?>" required>
 
-                <label for="dias_reservados">Días Reservados:</label>
-                <input type="text" id="dias_reservados" name="dias_reservados" value="<?php echo $rowHuesped['dias_reservados']; ?>" readonly>
+                    <label for="dias_reservados">Días Reservados:</label>
+                    <input type="text" id="dias_reservados" name="dias_reservados" value="<?php echo $rowHuesped['dias_reservados']; ?>" readonly>
                 </div>
                 <div>
-                <label for="habitacionActual">Habitación Actual:</label>
-                <input type="text" id="habitacionActual" name="habitacionActual" value="<?php echo $habitacion; ?>" readonly>
+                    <label for="habitacionActual">Habitación Actual:</label>
+                    <input type="text" id="habitacionActual" name="habitacionActual" value="<?php echo $habitacion; ?>" readonly>
 
-                <label for="habitacionNueva">Seleccionar Nueva Habitación:</label>
-                <select id="habitacionNueva" name="habitacionNueva">
-                    <option value="noCambiar">No cambiar Habitación</option>
-                    <?php
-                    $sqlHabitacionesDisponibles = "SELECT numero, tipo, valor_diario FROM habitaciones WHERE estado = 0";
-                    $resultHabitacionesDisponibles = $conn->query($sqlHabitacionesDisponibles);
+                    <label for="habitacionNueva">Seleccionar Nueva Habitación:</label>
+                    <select id="habitacionNueva" name="habitacionNueva">
+                        <option value="noCambiar">No cambiar Habitación</option>
+                        <?php
+                        $sqlHabitacionesDisponibles = "SELECT numero, tipo, valor_diario FROM habitaciones WHERE estado = 0";
+                        $resultHabitacionesDisponibles = $conn->query($sqlHabitacionesDisponibles);
 
-                    while ($rowHabitacion = $resultHabitacionesDisponibles->fetch_assoc()) {
-                        echo '<option value="' . $rowHabitacion['numero'] . '">'
-                            . ' Habitación ' . $rowHabitacion['numero'] . ' - ' . $rowHabitacion['tipo'] . ' ($' . $rowHabitacion['valor_diario'] . ' diario)'
-                            . '</option>';
-                    }
-                    ?>
-                </select>
+                        while ($rowHabitacion = $resultHabitacionesDisponibles->fetch_assoc()) {
+                            echo '<option value="' . $rowHabitacion['numero'] . '">'
+                                . ' Habitación ' . $rowHabitacion['numero'] . ' - ' . $rowHabitacion['tipo'] . ' ($' . $rowHabitacion['valor_diario'] . ' diario)'
+                                . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
                 <button type="submit">Guardar Cambios</button>
             </form>

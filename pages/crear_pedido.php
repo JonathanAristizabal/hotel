@@ -9,15 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Consulta SQL para obtener el ticket y la habitación a partir del documento
     $sql = "SELECT ticket, habitacion FROM huespedes WHERE documento = '$documento'";
     $result = $conn->query($sql);
-    
+
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $ticket = $row['ticket'];
         $habitacion = $row['habitacion'];
 
         // Consulta SQL para insertar el nuevo pedido en la tabla de pedidos
-        $sqlInsertPedido = "INSERT INTO pedidos (documento, descripcion, valor, habitacion)
-                            VALUES ('$documento', '$descripcion', '$valor', '$habitacion')";
+        $sqlInsertPedido = "INSERT INTO pedidos (documento, ticket,descripcion, valor, habitacion)
+                            VALUES ('$documento', '$ticket','$descripcion', '$valor', '$habitacion')";
 
         if ($conn->query($sqlInsertPedido) === true) {
             echo '<script>
