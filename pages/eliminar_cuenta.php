@@ -5,48 +5,58 @@ include '../conections/conection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmacion = $_POST["confirmacion"];
-    
+
     if ($confirmacion === "Eliminar") {
         // Asegúrate de que el usuario esté autenticado antes de eliminar la cuenta
-        if (isset($_SESSION["id_usuario"])) {
-            $id_usuario = $_SESSION["id_usuario"];
-            
+        if (isset($_SESSION["documento"])) {
+            $documento_usuario = $_SESSION["documento"];
+
             // Verifica si el usuario es un administrador (tipoUsuarioId = 1)
-            $stmt_verificar_admin = $conn->prepare("SELECT tipoUsuarioId FROM usuarios WHERE id = ?");
-            $stmt_verificar_admin->bind_param("i", $id_usuario);
+            $stmt_verificar_admin = $conn->prepare("SELECT tipoUsuarioId FROM usuarios WHERE documento = ?");
+            $stmt_verificar_admin->bind_param("s", $documento_usuario);
             $stmt_verificar_admin->execute();
             $stmt_verificar_admin->bind_result($tipoUsuarioId);
             $stmt_verificar_admin->fetch();
             $stmt_verificar_admin->close();
-            
+
             if ($tipoUsuarioId === 1) {
-                // Si el usuario es un administrador, procede a eliminar la cuenta
-                $stmt_eliminar = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
-                $stmt_eliminar->bind_param("i", $id_usuario);
-                
-                if ($stmt_eliminar->execute()) {
-                    echo "La cuenta de usuario ha sido eliminada con éxito.";
-                    // Aquí puedes redirigir al usuario a una página de confirmación o cerrar la sesión, etc.
+                // Si el usuario es un administrador, obtén el documento del usuario a eliminar de la URL
+                if (isset($_GET["documento"])) {
+                    $documento_eliminar = $_GET["documento"];
+
+                    // Elimina la cuenta del usuario especificado en la URL
+                    $stmt_eliminar = $conn->prepare("DELETE FROM usuarios WHERE documento = ?");
+                    $stmt_eliminar->bind_param("s", $documento_eliminar);
+
+                    if ($stmt_eliminar->execute()) {
+                        echo "La cuenta de usuario ha sido eliminada con éxito.";
+                        // Aquí puedes redirigir al usuario a una página de confirmación o realizar otras acciones necesarias.
+                    } else {
+                        echo "Error al eliminar la cuenta de usuario: " . $stmt_eliminar->error;
+                    }
+
+                    $stmt_eliminar->close();
                 } else {
-                    echo "Error al eliminar la cuenta de usuario: " . $stmt_eliminar->error;
+                    echo "No se proporcionó un documento de usuario a eliminar en la URL.";
                 }
-                
-                $stmt_eliminar->close();
             } else {
-                echo "No tienes permisos para eliminar esta cuenta.";
+                echo "No tienes permisos para eliminar cuentas de usuario.";
             }
         } else {
-            echo "No tienes permisos para eliminar esta cuenta.";
+            echo "No tienes permisos para eliminar cuentas de usuario.";
         }
     } else {
         echo "La confirmación es incorrecta. La cuenta de usuario no ha sido eliminada.";
     }
-    
+
     $conn->close();
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../assets/css/eliminar_cuenta.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 </head>
+
 <body>
     <header>
         <div id="logo">
@@ -76,4 +87,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </section>
 </body>
+
 </html>

@@ -1,10 +1,6 @@
 <?php
+session_start();
 include '../conections/conection.php';
-
-// Verificar si la conexión a la base de datos se realizó con éxito
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
 
 // Consultas SQL para obtener los datos
 $sql_usuarios = "SELECT * FROM usuarios";
@@ -20,7 +16,7 @@ $result_habitaciones = $conn->query($sql_habitaciones);
 $rowCliente = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $documento = $_POST['cedula'];
+    $documento = $_POST['documento'];
 
     // Consulta SQL para obtener los detalles del cliente por número de documento
     $sqlCliente = "SELECT h.*, t.tipo AS tipo_habitacion, t.valor_diario AS valor_habitacion
@@ -95,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="modulo-header">Consultas</div>
             <div class="modulo-content">
                 <form id="consulta-form" method="POST">
-                    <input type="text" id="cedula" name="cedula" placeholder="Número de documento">
+                    <input type="text" id="documento" name="documento" placeholder="Número de documento">
                     <button class="boton_consultar" type="submit">Consultar</button>
                 </form>
                 <?php
@@ -421,7 +417,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Apellido</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
-                                <!-- Agregamos un encabezado para la última columna -->
+                                <th>País</th>
+                                <th>Departamento</th>
+                                <th>Ciudad</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -433,6 +431,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td><?= $row['apellido'] ?></td>
                                     <td><?= $row['correo'] ?></td>
                                     <td><?= $row['telefono'] ?></td>
+                                    <td><?= $row['pais'] ?></td>
+                                    <td><?= $row['departamento'] ?></td>
+                                    <td><?= $row['ciudad'] ?></td>
                                     <td>
                                         <button class="modificar-button">
                                             <a href="modificar_cuenta.php?documento=<?= $row['documento'] ?>" style="color: white; text-decoration: none;">Modificar</a>
