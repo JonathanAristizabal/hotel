@@ -3,10 +3,6 @@ session_start(); // Asegúrate de iniciar la sesión si vas a usar $_SESSION
 
 include '../conections/conection.php';
 
-if ($conn->connect_error) {
-    die("La conexión a la base de datos falló: " . $conn->connect_error);
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmacion = $_POST["confirmacion"];
     
@@ -15,18 +11,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_SESSION["id_usuario"])) {
             $id_usuario = $_SESSION["id_usuario"];
             
-            // Utiliza consultas preparadas para evitar la inyección SQL
-            $stmt = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
-            $stmt->bind_param("i", $id_usuario);
+            // Verifica si el usuario es un administrador (tipoUsuarioId = 1)
+            $stmt_verificar_admin = $conn->prepare("SELECT tipoUsuarioId FROM usuarios WHERE id = ?");
+            $stmt_verificar_admin->bind_param("i", $id_usuario);
+            $stmt_verificar_admin->execute();
+            $stmt_verificar_admin->bind_result($tipoUsuarioId);
+            $stmt_verificar_admin->fetch();
+            $stmt_verificar_admin->close();
             
-            if ($stmt->execute()) {
-                echo "La cuenta de usuario ha sido eliminada con éxito.";
-                // Aquí puedes redirigir al usuario a una página de confirmación o cerrar la sesión, etc.
+            if ($tipoUsuarioId === 1) {
+                // Si el usuario es un administrador, procede a eliminar la cuenta
+                $stmt_eliminar = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
+                $stmt_eliminar->bind_param("i", $id_usuario);
+                
+                if ($stmt_eliminar->execute()) {
+                    echo "La cuenta de usuario ha sido eliminada con éxito.";
+                    // Aquí puedes redirigir al usuario a una página de confirmación o cerrar la sesión, etc.
+                } else {
+                    echo "Error al eliminar la cuenta de usuario: " . $stmt_eliminar->error;
+                }
+                
+                $stmt_eliminar->close();
             } else {
-                echo "Error al eliminar la cuenta de usuario: " . $stmt->error;
+                echo "No tienes permisos para eliminar esta cuenta.";
             }
-            
-            $stmt->close();
         } else {
             echo "No tienes permisos para eliminar esta cuenta.";
         }
@@ -61,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="eliminar-usuario">
         <h1>Eliminar Cuenta de Usuario</h1>
         <p>Por favor, confirma que deseas eliminar tu cuenta de usuario.</p>
-        <form action="procesar_eliminacion.php" method="POST">
+        <form action="" method="POST">
             <label for="confirmacion">Escribe "Eliminar" para confirmar:</label>
             <input type="text" name="confirmacion" id="confirmacion" required>
             <button type="submit">Eliminar Cuenta</button>

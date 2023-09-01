@@ -2,8 +2,10 @@
 /* Importar la base de datos */
 include '../conections/conection.php';
 
+session_start(); // Iniciar la sesión
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $documento = $_POST['documento']; // Obtener la cédula ingresada en el formulario
+    $documento = $_POST['documento']; // Obtener el documento ingresado en el formulario
     $contrasena = $_POST['contrasena']; // Obtener la contraseña ingresada en el formulario
     $sql = "SELECT contrasena FROM usuarios WHERE documento = '$documento'";
     $result = $conn->query($sql);
@@ -14,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verificar si la contraseña ingresada coincide con la almacenada en la base de datos
         if (password_verify($contrasena, $hashed_password)) {
+            $_SESSION["documento"] = $documento; // Guardar el documento del usuario en la sesión
             header("Location: panel_gestor.php"); // Cambiar la ruta según sea necesario
         } else {
             echo "Usuario o contraseña incorrectas";
