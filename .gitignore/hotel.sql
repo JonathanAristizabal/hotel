@@ -1,16 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2023 a las 09:11:24
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -75,16 +62,6 @@ CREATE TABLE `huespedes` (
   `dias_reservados` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `huespedes`
---
-
-INSERT INTO `huespedes` (`documento`, `nombre`, `apellido`, `ticket`, `habitacion`, `fecha_checkIN`, `fecha_checkOUT`, `dias_reservados`) VALUES
-(1053810807, 'Jonathan', 'Aristizabal', '647AMY', 1, '2023-08-28', '2023-08-30', 2),
-(1053872476, 'Jeimy', 'prueba', 'TSMDOA', 2, '2023-08-23', '2023-08-23', 0),
-(30324221, 'segunda', 'prueba', 'G1XJ7K', 3, '2023-08-28', '2023-08-30', 2);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pedidos`
@@ -97,8 +74,7 @@ CREATE TABLE `pedidos` (
   `valor` decimal(10,0) NOT NULL,
   `habitacion` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-);
- ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
