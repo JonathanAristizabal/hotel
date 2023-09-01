@@ -91,7 +91,9 @@ $conn->close();
             </ul>
         </nav>
     </header>
-    <h1>Modificar Cuenta de Usuario</h1>
+    <h2>Modificar Cuenta de Usuario</h2>
+    <br>
+    <br>
     <main>
         <section>
             <div class="form-container">

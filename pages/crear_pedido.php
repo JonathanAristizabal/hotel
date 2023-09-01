@@ -40,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/crear_pedido.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-
     <title>Crear Nuevo Pedido</title>
 </head>
 
@@ -55,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
         </nav>
     </header>
-    <h1>Crear Nuevo Pedido</h1>
+    <h2>Crear Nuevo Pedido</h2>
     <form action="" method="POST">
         <label for="documento">Documento y Ticket:</label>
         <select id="documento" name="documento" required>

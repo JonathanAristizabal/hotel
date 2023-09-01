@@ -1,0 +1,113 @@
+/* Estilos generales */
+body, header, footer {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para el encabezado */
+  header {
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  nav.navegacion {
+    color: #34495e;
+    padding: 10px;
+    text-align: right;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    background-color: #34495e;
+    font-size: 16px;
+    padding: 0px 0px 0px 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 140px;
+    display: inline-block;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 0px 8px 0px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    color: #ffffff;
+  }
+  
+  nav ul li a:hover {
+    color: #969696;
+  }
+  
+  /* Estilos para la sección de eliminación de usuario */
+  .eliminar-usuario {
+    background-color: #f1f1f1;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 40px);
+    text-align: center;
+  }
+  
+  .eliminar-usuario h1 {
+    color: #34495e;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .eliminar-usuario p {
+    color: #34495e;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para el formulario de eliminación de cuenta */
+  .eliminar-usuario form {
+    text-align: center;
+  }
+  
+  .eliminar-usuario label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #34495e;
+    font-size: 16px;
+  }
+  
+  .eliminar-usuario {
+    background-color: #f1f1f1;
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px; /* Ajusta el ancho máximo del contenedor */
+    text-align: center;
+  }
+  
+  .eliminar-usuario button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .eliminar-usuario button:hover {
+    background-color: #c0392b;
+  }
+  

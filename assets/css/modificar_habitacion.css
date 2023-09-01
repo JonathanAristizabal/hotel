@@ -1,48 +1,143 @@
 /* Estilos generales */
-/* Utilizar la fuente Roboto */
-body, header, footer {
-  font-family: "Roboto", sans-serif;
-}
-
 body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f3f3f3;
 }
 
+/* Estilos para el encabezado */
 header {
   background-color: #34495e;
-  color: #fff;
+  color: white;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
 }
 
-nav {
-  text-align: center;
+#logo {
+  margin-left: 20px;
 }
 
-nav ul {
-  list-style: none;
-  display: inline-block; /* Cambia la visualización a "inline-block" */
-  margin: 0;
-  padding: 10px 0px 15px 0px;
+#logo img {
+  max-width: 100%;
+  height: auto;
 }
 
-nav ul li {
-  display: inline; /* Muestra los elementos de navegación en línea */
-  margin-right: 20px; /* Espacio entre los elementos de navegación */
+/* Estilos para la lista de encabezados */
+ul.ul-encabezados {
+  list-style-type: none;
+  padding: 0;
 }
 
-nav ul li a {
+ul.ul-encabezados li {
+  display: inline;
+  margin-right: 20px;
+}
+
+ul.ul-encabezados a {
   text-decoration: none;
-  color: #fff;
+  color: white;
 }
 
-nav ul li a:hover {
-  color: #919191;
-}
-
-main {
+/* Estilos para el módulo de modificación de reserva */
+.contenedor {
+  background-color: white;
+  width: 80%;
+  margin: 20px auto;
   padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  color: #34495e;
+  border-radius: 5px;
+}
+
+.modulo-header {
+  color: #34495e;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.modulo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.middle-section {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="date"],
+select {
+  padding: 8px 0px 8px 0px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+  color: #34495e;
+  width: 10%;
+}
+
+input[type="text"],
+select {
+  text-align: center;
+  padding: 8px 0px 8px 0px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+  color: #34495e;
+  width: 50%;
+}
+
+input[type="number"],
+select {
+  text-align: center;
+  padding: 8px 0px 8px 0px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+  color: #34495e;
+  width: 15%;
+}
+
+button[type="submit"] {
+  background-color: #34495e;
+  color: white;
+  border: none;
+  padding: 8px 0px 8px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease-in-out;
+  width: 20%;
+}
+
+/* Efecto de hover para botones */
+button[type="submit"]:hover {
+  background-color: #555;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+  color: red;
+  font-weight: bold;
 }

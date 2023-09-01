@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,13 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <title>Modificar_habitacion</title>
 </head>
-
-<body>
-
-</body>
-
-</html>
-
 <body>
     <!-- encabezado -->
     <header>
@@ -73,24 +65,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </nav>
     </header>
     <br>
-
+    <section></section>
     <h2>Modificar Habitación</h2>
-    <form method="post">
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" required>
-            <option value="<?php echo $tipo; ?>">Individual</option>
-            <option value="Individual">Individual</option>
-            <option value="Doble">Doble</option>
-            <option value="Suite">Suite</option>
-        </select>
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>" required><br>
-        <label for="valor_diario">Valor Diario:</label>
-        <input type="number" id="valor_diario" name="valor_diario" value="<?php echo $valor_diario; ?>" required><br>
-        <button type="submit">Modificar</button>
-    </form>
+    <div>
+        <form method="post">
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="Individual" <?php if ($tipo === 'Individual') echo 'selected'; ?>>Individual</option>
+                <option value="Doble" <?php if ($tipo === 'Doble') echo 'selected'; ?>>Doble</option>
+                <option value="Suite" <?php if ($tipo === 'Suite') echo 'selected'; ?>>Suite</option>
+            </select>
+            <br>
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>" required>
+            <br>
+            <label for="valor_diario">Valor Diario:</label>
+            <input type="number" id="valor_diario" name="valor_diario" value="<?php echo $valor_diario; ?>" required>
+            <br>
+            <br>
+            <button type="submit">Modificar</button>
+        </form>
+    </div>
 </body>
-
 </html>
 
 <?php

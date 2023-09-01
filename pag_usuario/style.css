@@ -52,7 +52,8 @@ nav{
 }
 
 nav > a{
-    color: #fff;
+    font-size: 18px;
+    color: #be8b09;
     font-weight: 300;
     text-decoration: none;
     margin-right: 10px;
@@ -60,6 +61,7 @@ nav > a{
 
 nav > a:hover{
     text-decoration: underline;
+    color: #ffffff;
 }
 
 header .textos-header{
@@ -116,7 +118,7 @@ main .sobre-nosotros{
 }
 
 .contenido-textos h3 span{
-    background: #1e6ba2;
+    background: #68757b;
     color: #fff;
     border-radius: 50%;
     display: inline-block;
@@ -169,7 +171,7 @@ main .sobre-nosotros{
     height: 100%;
     top: 0;
     transform: scale(0);
-    background: #be8b09;
+    background: #9e9797;
     transition: transform .5s;
     display: flex;
     justify-content: center;
@@ -197,7 +199,7 @@ main .sobre-nosotros{
 }
 
 .cards .card{
-    background: #68757b;
+    background: #be8b09;
     display: flex;
     width: 46%;
     height: 200px;

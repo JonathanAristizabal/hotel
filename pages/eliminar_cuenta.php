@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar cuenta de usuario</title>
-    <link rel="stylesheet" href="../assets/css/modificar_cuenta.css">
+    <link rel="stylesheet" href="../assets/css/eliminar_cuenta.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 </head>
 <body>
