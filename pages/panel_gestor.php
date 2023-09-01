@@ -263,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="modulo-content">
                 <?php
                 // Consulta SQL para obtener información de pedidos con nombre y apellido de usuarios
-                $sqlPedidos = "SELECT p.documento, u.nombre, u.apellido, p.descripcion, p.valor, p.habitacion, h.ticket
+                $sqlPedidos = "SELECT p.id, p.documento, u.nombre, u.apellido, p.descripcion, p.valor, p.habitacion, h.ticket
            FROM pedidos p
            LEFT JOIN huespedes h ON p.documento = h.documento
            LEFT JOIN usuarios u ON p.documento = u.documento";
@@ -273,6 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <table>
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Documento</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
@@ -286,6 +287,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <tbody>
                             <?php while ($rowPedido = $resultPedidos->fetch_assoc()) : ?>
                                 <tr>
+                                    <td>
+                                        <?= $rowPedido['id'] ?>
+                                    </td>
                                     <td>
                                         <?= $rowPedido['documento'] ?>
                                     </td>
