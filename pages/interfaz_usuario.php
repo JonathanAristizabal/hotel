@@ -108,7 +108,7 @@
         <h2 class="titulo">Opiniones de Nuestros Clientes</h2>
         <div class="cards">
           <div class="card">
-            <img src="cliente1.jpg" alt="Foto de un cliente" />
+            <img src="../assets/img/cliente1.jpg" alt="Foto de un cliente" />
             <div class="contenido-texto-card">
               <h4>Maria González</h4>
               <p>
@@ -119,7 +119,7 @@
             </div>
           </div>
           <div class="card">
-            <img src="cliente2.jpg" alt="Foto de un cliente" />
+            <img src="../assets/img/cliente1.jpg" alt="Foto de un cliente" />
             <div class="contenido-texto-card">
               <h4>Juan Pérez</h4>
               <p>
@@ -137,7 +137,7 @@
           <h2 class="titulo">Nuestros Servicios</h2>
           <div class="servicio-cont">
             <div class="servicio-ind">
-              <img src="spa-servicio.jpg" alt="Icono de spa" />
+              <img src="../assets/img/spa.jpg" alt="Icono de spa" />
               <h3>Spa de Lujo</h3>
               <p>
                 Relájate y rejuvenece en nuestro spa de clase mundial con
@@ -145,7 +145,7 @@
               </p>
             </div>
             <div class="servicio-ind">
-              <img src="restaurante-servicio.jpg" alt="Icono de restaurante" />
+              <img src="../assets/img/restaurante.jpg" alt="Icono de restaurante" />
               <h3>Gastronomía Exquisita</h3>
               <p>
                 Disfruta de platos gourmet en nuestro restaurante, donde los
@@ -153,10 +153,10 @@
               </p>
             </div>
             <div class="servicio-ind">
-              <img src="actividades-servicio.jpg" alt="Icono de actividades" />
+              <img src="../assets/img/actividades.jpg" alt="Icono de actividades" />
               <h3>Actividades Variadas</h3>
               <p>
-                Ofrecemos una variedad de actividades, desde deportes acuáticos
+                Ofrecemos una variedad de actividades, taller de relajacion, deportes acuáticos
                 hasta excursiones locales, para hacer que tu estadía sea
                 memorable.
               </p>

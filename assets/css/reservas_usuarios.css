@@ -32,10 +32,8 @@ font-family: 'Poppins', sans-serif;
 
 header{
     width: 100%;
-    height: 600px;
-    background: #1e6ba2;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(59, 100%, 50%, 0.308)), url(portada.jpg);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, hsla(323, 17%, 15%, 0.719), hsla(56, 100%, 50%, 0.171)), url(portada.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 150px;
+    background: #be8b09;  /* fallback for old browsers */
     background-size: cover;
     background-attachment: fixed;
     position: relative;
@@ -52,8 +50,8 @@ nav{
 }
 
 nav > a{
-    font-size: 18px;
-    color: #be8b09;
+    font-size: 20px;
+    color: #ffffff;
     font-weight: 300;
     text-decoration: none;
     margin-right: 10px;
@@ -66,7 +64,6 @@ nav > a:hover{
 
 header .textos-header{
     display: flex;
-    height: 430px;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -76,13 +73,13 @@ header .textos-header{
 
 .textos-header h1{
     font-family: 'Libre Baskerville', serif;
-    font-size: 60px;
+    font-size: 40px;
     color: #fff ;
 }
 
 .textos-header h2{
     font-family: 'Libre Baskerville', serif;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 300;
     color: #fff ;
 }

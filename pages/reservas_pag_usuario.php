@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas - Paradise Hotel & Resort</title>
     <link rel="shortcut icon" href="icon-ordenador.png" type="image/x-icon">
-    <link rel="stylesheet" href="reservas_usuarios.css">
+    <link rel="stylesheet" href="../assets/css/reservas_usuarios.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="#">Inicio</a>
+            <a href="./interfaz_usuario.php">Inicio</a>
             <a href="#">Habitaciones</a>
             <a href="#">Servicios</a>
             <a href="#">Contacto</a>
