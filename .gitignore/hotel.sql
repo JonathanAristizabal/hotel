@@ -1,3 +1,16 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-09-2023 a las 18:55:46
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,17 +47,6 @@ CREATE TABLE `habitaciones` (
   `valor_diario` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `habitaciones`
---
-
-INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_diario`) VALUES
-(1, 'Individual', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing', 50000),
-(2, 'Doble', 1, 'sdfg', 70000),
-(3, 'Suite', 1, 'rtbyyw', 150000),
-(4, 'Suite', 0, 'qqqqqqqqqqq', 60000),
-(5, 'Doble', 0, 'lctm', 50000);
-
 -- --------------------------------------------------------
 
 --
@@ -53,8 +55,6 @@ INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_di
 
 CREATE TABLE `huespedes` (
   `documento` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
   `ticket` varchar(11) NOT NULL,
   `habitacion` int(11) NOT NULL,
   `fecha_checkIN` date NOT NULL,
@@ -62,18 +62,18 @@ CREATE TABLE `huespedes` (
   `dias_reservados` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pedidos`
 --
 
 CREATE TABLE `pedidos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `documento` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
-  `habitacion` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `habitacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -119,9 +119,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`documento`, `correo`, `nombre`, `apellido`, `telefono`, `pais`, `departamento`, `ciudad`, `contrasena`, `tipoUsuarioId`) VALUES
-(30324221, 'ayne@gmail.com', 'Ayne', ' Tapia', '3165306359', 'Colombia', 'Caldas', 'Manizales', '$2y$10$7bfGQjA..Tcdgs5H58PeteB1Mt0leN4iHiG06fEOFM0OqRPFtTawW', 0),
-(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', '  Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 0),
-(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy', '  Pinto', '3058122481', 'Colombia', 'Caldas', 'Manizales', '$2y$10$NnuvT.hwhIpTkbC419xeDOHNtZN/Gpu4j/KhyfCO2OKxXYjF846D6', 0);
+(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', '  Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 1),
+(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy Tatiana', 'Tapia', '3058122481', 'Colombia', 'Caldas', 'Villamaria', '$2y$10$cZ4IBk4A3DcA1D45r3Zaye1GZ1.sYjriVP/oN5XbzIr1oJyiDFfEe', 1);
 
 --
 -- Índices para tablas volcadas
@@ -150,6 +149,7 @@ ALTER TABLE `huespedes`
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_pedidos_habitaciones` (`habitacion`),
   ADD KEY `cedula` (`documento`);
 
@@ -169,6 +169,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipousuarios`

@@ -2,16 +2,6 @@
 // Incluir el archivo de conexión a la base de datos
 include '../conections/conection.php';
 
-// Inicializar variables
-$documento = '';
-$correo = '';
-$nombre = '';
-$apellido = '';
-$telefono = '';
-$pais = '';
-$departamento = '';
-$ciudad = '';
-$contrasena = '';
 
 // Verificar si se ha proporcionado un documento
 if (isset($_GET['documento'])) {
