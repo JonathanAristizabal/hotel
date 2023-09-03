@@ -58,8 +58,7 @@ nav > a{
 }
 
 nav > a:hover{
-    text-decoration: underline;
-    color: #ffffff;
+    color: #68757b;
 }
 
 header .textos-header{
@@ -74,13 +73,6 @@ header .textos-header{
 .textos-header h1{
     font-family: 'Libre Baskerville', serif;
     font-size: 40px;
-    color: #fff ;
-}
-
-.textos-header h2{
-    font-family: 'Libre Baskerville', serif;
-    font-size: 24px;
-    font-weight: 300;
     color: #fff ;
 }
 

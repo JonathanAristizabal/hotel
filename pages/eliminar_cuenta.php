@@ -29,8 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt_eliminar->bind_param("s", $documento_eliminar);
 
                     if ($stmt_eliminar->execute()) {
-                        echo "La cuenta de usuario ha sido eliminada con éxito.";
-                        // Aquí puedes redirigir al usuario a una página de confirmación o realizar otras acciones necesarias.
+                        // Redirige al usuario al panel de administrador
+                        header("Location: panel_gestor.php");
+                        exit();
                     } else {
                         echo "Error al eliminar la cuenta de usuario: " . $stmt_eliminar->error;
                     }
@@ -80,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="eliminar-usuario">
         <h1>Eliminar Cuenta de Usuario</h1>
         <p>Por favor, confirma que deseas eliminar tu cuenta de usuario.</p>
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta cuenta de usuario?');">
             <label for="confirmacion">Escribe "Eliminar" para confirmar:</label>
             <input type="text" name="confirmacion" id="confirmacion" required>
             <button type="submit">Eliminar Cuenta</button>

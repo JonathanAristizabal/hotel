@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
             <br>
             <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>" required>
+            <input type="text#descripcion" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>" required>
             <br>
             <label for="valor_diario">Valor Diario:</label>
             <input type="number" id="valor_diario" name="valor_diario" value="<?php echo $valor_diario; ?>" required>

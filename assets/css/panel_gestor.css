@@ -56,6 +56,7 @@ table {
   border-collapse: collapse;
   border: 1px solid #ccc;
   margin-bottom: 20px; /* Espacio entre tablas */
+  font-size: 14px;
 }
 
 table th, table td {
@@ -74,6 +75,12 @@ table button {
   font-size: 12px;
   border-radius: 5px;
   text-decoration: none; /* Quitar la decoración de texto */
+}
+
+/* Estilos para la columna de "Descripción" en la tabla */
+table td.descripcion {
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 table button:hover {
@@ -200,6 +207,6 @@ footer {
   color: #fff;
 }
 
-.boton_consultar{
+.boton_consultar {
   font-size: 16px;
 }

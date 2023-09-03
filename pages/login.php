@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <nav>
             <ul>
-                <li><a href="../index.php">Inicio</a></li>
+                <li><a href="./home_panel.php">Inicio</a></li>
             </ul>
         </nav>
     </header>

@@ -11,14 +11,14 @@
 <body>
     <header>
         <nav>
-            <a href="./interfaz_usuario.php">Inicio</a>
+            <a href="../index.php">Inicio</a>
             <a href="#">Habitaciones</a>
             <a href="#">Servicios</a>
             <a href="#">Contacto</a>
         </nav>
+        <br>
         <section class="textos-header">
             <h1 class="titulo1">Paradise Hotel & Resort</h1>
-            <h2 class="subtitulo1">"Creando momentos excepcionales."</h2>
         </section>
     </header>
     
@@ -59,7 +59,7 @@
         <div class="contenedor-footer">
             <div class="content-foo">
                 <h4>Teléfono</h4>
-                <p>+57 3178542709</p>
+                <p>(60)6808080</p>
             </div>
             <div class="content-foo">
                 <h4>Email</h4>

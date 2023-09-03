@@ -1,0 +1,220 @@
+/* Estilos generales */
+
+/* Utilizar la fuente Roboto */
+body, header, footer {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: inline-block; /* Cambia la visualización a "inline-block" */
+    margin: 0;
+    padding: 10px 0px 15px 0px;
+}
+
+nav ul li {
+    display: inline; /* Muestra los elementos de navegación en línea */
+    margin-right: 20px; /* Espacio entre los elementos de navegación */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li a:hover {
+    text-decoration: none;
+    color: #919191;
+}
+    
+main {
+    padding: 20px;
+}
+
+/* Estilos para la sección de bienvenida */
+#bienvenida {
+    text-align: center; /* Centra el contenido horizontalmente */
+    position: relative; /* Para agregar sombra */
+}
+
+#bienvenida img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Agrega una sombra a la imagen */
+    filter: brightness(0.4); /* Aplica un filtro de brillo para oscurecer la imagen */
+    border-radius: 10px;
+}
+
+#bienvenida h1 {
+    font-size: 50px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%; /* Alinea en el centro verticalmente */
+    left: 50%; /* Alinea en el centro horizontalmente */
+    transform: translate(-50%, -230%); /* Centra exactamente en el centro */
+    padding: 10px; /* Espacio alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados para el fondo del texto */
+    width: 70%; /* Ancho del fondo del texto */
+}
+
+#bienvenida p {
+    font-size: 20px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%; /* Alinea en el centro verticalmente */
+    left: 50%; /* Alinea en el centro horizontalmente */
+    transform: translate(-50%, -70%); /* Centra exactamente en el centro */
+    
+    padding: 10px; /* Espacio alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados para el fondo del texto */
+    width: 70%; /* Ancho del fondo del texto */
+}
+
+/* servicios */
+.titulo-servicios {
+    font-size: 26px; /* Tamaño del título */
+    color: #34495e;
+    margin-bottom: 20px; /* Espacio inferior */
+    text-align: center;
+}
+
+#servicios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de igual ancho */
+    gap: 20px; /* Espacio entre las columnas y filas */
+    text-align: center;
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+.servicio h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #34495e;
+    
+}
+
+.servicio p {
+    text-align: center;
+    font-size: 16px;
+    color: #34495e;
+}
+
+
+.servicio img {
+    max-width: 80%;
+    padding: 0px 0px 0px 0px;
+    height: auto;
+    border: 1px solid #34495e; /* Agrega un borde a cada servicio */
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: center;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); /* Agrega una sombra abajo y a la derecha de la imagen */
+    transition: transform 0.2s; /* Agrega una transición suave al hacer hover */  
+}
+
+.servicio img:hover {
+    transform: scale(1.05); /* Escala el servicio al 105% al hacer hover */
+}
+
+/* Estilos para el formulario de contacto */
+
+#formulario {
+    background-color: #34495e; /* Color de fondo */
+    padding: 30px 0px 30px 0px;
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: center; /* Centra el contenido horizontalmente */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    max-width: 500px; /* Define un ancho máximo para el contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agrega una sombra */
+}
+
+#formulario h2 {
+    font-size: 22px;
+    color: #ffffff; /* Color del título */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: #ffffff; /* Color del texto de etiqueta */
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 70%;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 10px; /* Espacio inferior */
+    border: 1px solid #ccc; /* Borde ligero */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 5px 5px 5px;
+}
+
+#info-contacto {
+    margin-top: 10px;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.derechos-reservados{
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0px 0px 0px;
+}
+
+.ul-pie{
+    font-size: 14px;
+    text-decoration: underline rgb(255, 255, 255);
+}
+

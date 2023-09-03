@@ -101,8 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } else {
                         echo '<div id="resultado-consulta">';
                         echo '<h2>Detalles del Cliente</h2>';
-                        echo '<p><strong>Nombre:</strong> ' . $rowCliente['nombre'] . ' ' . $rowCliente['apellido'] . '</p>';
-                        echo '<p><strong>Documento:</strong> ' . $rowCliente['documento'] . '</p>';
                         echo '<p><strong>Ticket:</strong> ' . $rowCliente['ticket'] . '</p>';
                         echo '<p><strong>Días Reservados:</strong> ' . $rowCliente['dias_reservados'] . '</p>';
                         echo '<p><strong>Habitación:</strong> ' . $rowCliente['habitacion'] . '</p>';
@@ -116,122 +114,122 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </section>
 
         <!-- Módulo de Facturación -->
-<section class="modulo" id="facturacion">
-    <div class="modulo-header">Facturación</div>
-    <div class="modulo-content">
-        <?php
-        // Consulta SQL para obtener los documentos de huéspedes
-        $sqlHuespedes = "SELECT documento, dias_reservados, habitacion FROM huespedes";
-        $resultHuespedes = $conn->query($sqlHuespedes);
+        <section class="modulo" id="facturacion">
+            <div class="modulo-header">Facturación</div>
+            <div class="modulo-content">
+                <?php
+                // Consulta SQL para obtener los documentos de huéspedes
+                $sqlHuespedes = "SELECT documento, dias_reservados, habitacion FROM huespedes";
+                $resultHuespedes = $conn->query($sqlHuespedes);
 
-        if ($resultHuespedes) {
-            if ($resultHuespedes->num_rows > 0) {
-                $facturaciones = array();
+                if ($resultHuespedes) {
+                    if ($resultHuespedes->num_rows > 0) {
+                        $facturaciones = array();
 
-                while ($rowHuespedes = $resultHuespedes->fetch_assoc()) {
-                    $documento = $rowHuespedes['documento'];
-                    $diasReservados = $rowHuespedes['dias_reservados'];
-                    $habitacion = $rowHuespedes['habitacion'];
+                        while ($rowHuespedes = $resultHuespedes->fetch_assoc()) {
+                            $documento = $rowHuespedes['documento'];
+                            $diasReservados = $rowHuespedes['dias_reservados'];
+                            $habitacion = $rowHuespedes['habitacion'];
 
-                    // Consulta SQL para obtener el valor_diario de la habitación
-                    $sqlHabitacion = "SELECT valor_diario FROM habitaciones WHERE numero = '$habitacion'";
-                    $resultHabitacion = $conn->query($sqlHabitacion);
+                            // Consulta SQL para obtener el valor_diario de la habitación
+                            $sqlHabitacion = "SELECT valor_diario FROM habitaciones WHERE numero = '$habitacion'";
+                            $resultHabitacion = $conn->query($sqlHabitacion);
 
-                    if ($resultHabitacion && $resultHabitacion->num_rows > 0) {
-                        $rowHabitacion = $resultHabitacion->fetch_assoc();
-                        $valorDiario = $rowHabitacion['valor_diario'];
+                            if ($resultHabitacion && $resultHabitacion->num_rows > 0) {
+                                $rowHabitacion = $resultHabitacion->fetch_assoc();
+                                $valorDiario = $rowHabitacion['valor_diario'];
 
-                        // Consulta SQL para obtener el nombre y apellido del usuario por documento
-                        $sqlUsuarios = "SELECT nombre, apellido FROM usuarios WHERE documento = '$documento'";
-                        $resultUsuarios = $conn->query($sqlUsuarios);
+                                // Consulta SQL para obtener el nombre y apellido del usuario por documento
+                                $sqlUsuarios = "SELECT nombre, apellido FROM usuarios WHERE documento = '$documento'";
+                                $resultUsuarios = $conn->query($sqlUsuarios);
 
-                        if ($resultUsuarios && $resultUsuarios->num_rows > 0) {
-                            $rowUsuarios = $resultUsuarios->fetch_assoc();
-                            $nombre = $rowUsuarios['nombre'];
-                            $apellido = $rowUsuarios['apellido'];
-                        } else {
-                            $nombre = 'No encontrado';
-                            $apellido = 'No encontrado';
+                                if ($resultUsuarios && $resultUsuarios->num_rows > 0) {
+                                    $rowUsuarios = $resultUsuarios->fetch_assoc();
+                                    $nombre = $rowUsuarios['nombre'];
+                                    $apellido = $rowUsuarios['apellido'];
+                                } else {
+                                    $nombre = 'No encontrado';
+                                    $apellido = 'No encontrado';
+                                }
+
+                                // Consulta SQL para obtener el total de pedidos por documento
+                                $sqlPedidos = "SELECT SUM(valor) AS total_pedidos FROM pedidos WHERE documento = '$documento'";
+                                $resultPedidos = $conn->query($sqlPedidos);
+
+                                if ($resultPedidos && $resultPedidos->num_rows > 0) {
+                                    $rowPedidos = $resultPedidos->fetch_assoc();
+                                    $totalPedidos = $rowPedidos['total_pedidos'];
+                                } else {
+                                    $totalPedidos = 0;
+                                }
+
+                                // Calcular el total para la columna de hospedaje
+                                $totalHospedaje = $valorDiario * $diasReservados;
+
+                                // Calcular el total de cada usuario
+                                $totalUsuario = $totalHospedaje + $totalPedidos;
+
+                                // Agregar los datos a la lista de facturaciones
+                                $facturaciones[] = array(
+                                    'documento' => $documento,
+                                    'nombre' => $nombre,
+                                    'apellido' => $apellido,
+                                    'totalHospedaje' => $totalHospedaje,
+                                    'totalPedidos' => $totalPedidos,
+                                    'totalUsuario' => $totalUsuario
+                                );
+                            }
                         }
 
-                        // Consulta SQL para obtener el total de pedidos por documento
-                        $sqlPedidos = "SELECT SUM(valor) AS total_pedidos FROM pedidos WHERE documento = '$documento'";
-                        $resultPedidos = $conn->query($sqlPedidos);
-
-                        if ($resultPedidos && $resultPedidos->num_rows > 0) {
-                            $rowPedidos = $resultPedidos->fetch_assoc();
-                            $totalPedidos = $rowPedidos['total_pedidos'];
-                        } else {
-                            $totalPedidos = 0;
+                        // Calcular el valor total de todos los usuarios
+                        $totalGeneral = 0;
+                        foreach ($facturaciones as $facturacion) {
+                            $totalGeneral += $facturacion['totalUsuario'];
                         }
 
-                        // Calcular el total para la columna de hospedaje
-                        $totalHospedaje = $valorDiario * $diasReservados;
+                        // Generar la tabla HTML con los datos obtenidos
+                        if (!empty($facturaciones)) {
+                            echo '<table>';
+                            echo '<thead>';
+                            echo '<tr>';
+                            echo '<th>Documento</th>';
+                            echo '<th>Nombre</th>';
+                            echo '<th>Apellido</th>';
+                            echo '<th>Hospedaje</th>';
+                            echo '<th>Pedidos</th>';
+                            echo '<th>Total Usuario</th>';
+                            echo '</tr>';
+                            echo '</thead>';
+                            echo '<tbody>';
 
-                        // Calcular el total de cada usuario
-                        $totalUsuario = $totalHospedaje + $totalPedidos;
+                            foreach ($facturaciones as $facturacion) {
+                                echo '<tr>';
+                                echo '<td>' . $facturacion['documento'] . '</td>';
+                                echo '<td>' . $facturacion['nombre'] . '</td>';
+                                echo '<td>' . $facturacion['apellido'] . '</td>';
+                                echo '<td>' . $facturacion['totalHospedaje'] . '</td>';
+                                echo '<td>' . $facturacion['totalPedidos'] . '</td>';
+                                echo '<td>' . $facturacion['totalUsuario'] . '</td>';
+                                echo '</tr>';
+                            }
 
-                        // Agregar los datos a la lista de facturaciones
-                        $facturaciones[] = array(
-                            'documento' => $documento,
-                            'nombre' => $nombre,
-                            'apellido' => $apellido,
-                            'totalHospedaje' => $totalHospedaje,
-                            'totalPedidos' => $totalPedidos,
-                            'totalUsuario' => $totalUsuario
-                        );
+                            echo '</tbody>';
+                            echo '</table>';
+                        } else {
+                            echo '<p>No hay registros disponibles.</p>';
+                        }
+
+                        // Mostrar el valor total de todos los usuarios
+                        echo '<p>Total General: ' . $totalGeneral . '</p>';
+                    } else {
+                        echo '<p>No hay registros disponibles.</p>';
                     }
-                }
-
-                // Calcular el valor total de todos los usuarios
-                $totalGeneral = 0;
-                foreach ($facturaciones as $facturacion) {
-                    $totalGeneral += $facturacion['totalUsuario'];
-                }
-
-                // Generar la tabla HTML con los datos obtenidos
-                if (!empty($facturaciones)) {
-                    echo '<table>';
-                    echo '<thead>';
-                    echo '<tr>';
-                    echo '<th>Documento</th>';
-                    echo '<th>Nombre</th>';
-                    echo '<th>Apellido</th>';
-                    echo '<th>Hospedaje</th>';
-                    echo '<th>Pedidos</th>';
-                    echo '<th>Total Usuario</th>';
-                    echo '</tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
-
-                    foreach ($facturaciones as $facturacion) {
-                        echo '<tr>';
-                        echo '<td>' . $facturacion['documento'] . '</td>';
-                        echo '<td>' . $facturacion['nombre'] . '</td>';
-                        echo '<td>' . $facturacion['apellido'] . '</td>';
-                        echo '<td>' . $facturacion['totalHospedaje'] . '</td>';
-                        echo '<td>' . $facturacion['totalPedidos'] . '</td>';
-                        echo '<td>' . $facturacion['totalUsuario'] . '</td>';
-                        echo '</tr>';
-                    }
-
-                    echo '</tbody>';
-                    echo '</table>';
                 } else {
-                    echo '<p>No hay registros disponibles.</p>';
+                    echo "Error en la consulta de huéspedes: " . $conn->error;
                 }
-
-                // Mostrar el valor total de todos los usuarios
-                echo '<p>Total General: ' . $totalGeneral . '</p>';
-            } else {
-                echo '<p>No hay registros disponibles.</p>';
-            }
-        } else {
-            echo "Error en la consulta de huéspedes: " . $conn->error;
-        }
-        ?>
-    </div>
-</section>
+                ?>
+            </div>
+        </section>
 
 
         <!-- Módulo de Habitaciones -->
@@ -264,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td>
                                         <?= ($row_habitaciones['estado'] == 1 ? 'Ocupada' : 'Disponible') ?>
                                     </td>
-                                    <td>
+                                    <td class="descripcion">
                                         <?= $row_habitaciones['descripcion'] ?>
                                     </td>
                                     <td>$

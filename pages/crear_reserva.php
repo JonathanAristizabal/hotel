@@ -9,10 +9,10 @@ $resultDocumentos = $conn->query($sqlDocumentos);
 $sqlHabitacionesDisponibles = "SELECT numero, tipo, valor_diario FROM habitaciones WHERE estado = 0";
 $resultHabitacionesDisponibles = $conn->query($sqlHabitacionesDisponibles);
 
-// Variables para mensajes de éxito o error
+// Variable para mostrar mensajes de éxito o error
 $reservaMensaje = "";
 
-// Cuando se envíe el formulario
+// Cuando se envía el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $documento = $_POST['documento'];
     $habitacion = $_POST['habitacion'];
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $intervalo = $fechaLlegada->diff($fechaSalida);
     $diasReservados = $intervalo->days;
 
-    //Validar que la fecha de llegada y salida sean válidas
+    // Validar que la fecha de llegada y salida sean válidas
     $fechaActual = new DateTime();
     if ($fechaLlegada < $fechaActual) {
         // La fecha de llegada es anterior a la fecha actual, mostrar un mensaje de error
@@ -36,15 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert('La fecha de llegada no puede ser anterior a la fecha actual');
         window.location.href = 'reservas.php';
       </script>";
-      exit(); // Detener la ejecución
+        exit(); // Detener la ejecución
     }
     if ($fechaSalida < $fechaLlegada) {
-        // La fecha de llegada es anterior a la fecha actual, mostrar un mensaje de error
+        // La fecha de salida es anterior a la fecha de llegada, mostrar un mensaje de error
         echo "<script>
         alert('La fecha de salida no puede ser anterior a la fecha de llegada');
         window.location.href = 'reservas.php';
       </script>";
-      exit(); // Detener la ejecución
+        exit(); // Detener la ejecución
     }
 
     // Consulta SQL para insertar la nueva reserva en la tabla huespedes
@@ -97,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="crear_reserva.php" method="POST">
             <label for="documento">Documento:</label>
             <select id="documento" name="documento" required>
+                <option value="">Selecciona un documento</option> <!-- Campo inicialmente limpio -->
                 <?php
                 while ($rowDocumento = $resultDocumentos->fetch_assoc()) {
                     echo '<option value="' . $rowDocumento['documento'] . '">' . $rowDocumento['documento'] . '</option>';
@@ -104,6 +105,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ?>
             </select>
             <br>
+
+            <!-- Contenedor para mostrar nombre y apellido del cliente -->
+            <div id="nombreApellidoContainer">
+                <p>Nombre del cliente: <span id="nombreCliente"></span></p>
+                <p>Apellido del cliente: <span id="apellidoCliente"></span></p>
+            </div>
+
+            <?php
+            include '../conections/conection.php';
+
+            // Esta parte del código se encarga de obtener el nombre y apellido del cliente
+            if (isset($_GET['documento'])) {
+                $documento = $_GET['documento'];
+                $sql = "SELECT nombre, apellido FROM usuarios WHERE documento = '$documento'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $data = array('nombre' => $row['nombre'], 'apellido' => $row['apellido']);
+                    echo json_encode($data);
+                }
+            }
+            ?>
+
+            <!-- Campo para seleccionar la habitación -->
             <label for="habitacion">Habitación:</label>
             <br>
             <br>
@@ -132,6 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><?php echo $reservaMensaje; ?></p>
         </div>
     </section>
+    <script src="../assets/js/nombre_apellido_reserva.js"></script>
 </body>
 
 </html>

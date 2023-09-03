@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2023 a las 18:55:46
+-- Tiempo de generación: 04-09-2023 a las 00:45:58
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,6 +47,20 @@ CREATE TABLE `habitaciones` (
   `valor_diario` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `habitaciones`
+--
+
+INSERT INTO `habitaciones` (`numero`, `tipo`, `estado`, `descripcion`, `valor_diario`) VALUES
+(100, 'Individual', 0, 'Cama cómoda, baño privado, Wi-Fi, TV, aire acondic', 50000),
+(101, 'Individual', 0, 'Cama cómoda, baño privado, Wi-Fi, TV, aire acondic', 50000),
+(103, 'Individual', 0, 'Cama cómoda, baño privado, Wi-Fi, TV, aire acondic', 50000),
+(104, 'Individual', 0, 'Cama cómoda, baño privado, Wi-Fi, TV, aire acondic', 50000),
+(200, 'Doble', 0, 'habitación doble con dos camas ofrece espacio ', 120000),
+(201, 'Doble', 0, 'habitación doble con dos camas ofrece espacio ', 120000),
+(300, 'Doble', 0, 'habitación espaciosa y lujosa con cama grande y sa', 200000),
+(301, 'Suite', 0, 'habitación espaciosa y lujosa con cama grande y sa', 200000);
+
 -- --------------------------------------------------------
 
 --
@@ -71,10 +85,11 @@ CREATE TABLE `huespedes` (
 CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
   `documento` int(11) NOT NULL,
+  `ticket` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
   `habitacion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -119,8 +134,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`documento`, `correo`, `nombre`, `apellido`, `telefono`, `pais`, `departamento`, `ciudad`, `contrasena`, `tipoUsuarioId`) VALUES
-(1053810807, 'jhonatan901230@hotmail.com', 'Jonathan', '  Aristizabal', '3187542709', 'Colombia', 'Caldas', 'Manizales', '$2y$10$ImiqPphMum4LMSuBPoPJeuhDl0XNSJVEgepYV8oboLNpW5.ohWYYO', 1),
-(1053872476, 'jeimytatianapinto@gmail.com', 'Jeimy Tatiana', 'Tapia', '3058122481', 'Colombia', 'Caldas', 'Villamaria', '$2y$10$cZ4IBk4A3DcA1D45r3Zaye1GZ1.sYjriVP/oN5XbzIr1oJyiDFfEe', 1);
+(123456789, 'admin@gmail.com', 'prueba', 'admin', '3001234567', 'Colombia', 'Caldas', 'Manizales', '', 1),
+(2147483647, 'cliente@gmail.com', 'prueba', 'cliente', '3124560987', 'Colombia', 'Caldass', 'Manizales', '', 0);
 
 --
 -- Índices para tablas volcadas
@@ -150,8 +165,9 @@ ALTER TABLE `huespedes`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_pedidos_habitaciones` (`habitacion`),
-  ADD KEY `cedula` (`documento`);
+  ADD KEY `ticket` (`ticket`),
+  ADD KEY `documento` (`documento`),
+  ADD KEY `habitacion` (`habitacion`);
 
 --
 -- Indices de la tabla `tipousuarios`
@@ -174,7 +190,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipousuarios`
@@ -198,13 +214,6 @@ ALTER TABLE `facturaciones`
 ALTER TABLE `huespedes`
   ADD CONSTRAINT `fk_huespedes_habitaciones` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_huespedes_usuarios` FOREIGN KEY (`documento`) REFERENCES `usuarios` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pedidos`
---
-ALTER TABLE `pedidos`
-  ADD CONSTRAINT `fk_pedidos_habitaciones` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pedidos_huespedes` FOREIGN KEY (`documento`) REFERENCES `huespedes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

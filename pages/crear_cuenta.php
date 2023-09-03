@@ -12,7 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ciudad = $_POST['ciudad'];
     $contrasena = $_POST['contrasena'];
     $confirmar_contrasena = $_POST['confirmar_contrasena'];
-    $tipoUsuarioId = 0; // Los usuarios creados por defecto serán tipo cliente
+    $tipoUsuarioId = $_POST['tipoUsuarioId'];; // Los usuarios creados por defecto serán tipo cliente
+
+
+    // $tipoUsuarioId = 0; // Los usuarios creados por defecto serán tipo cliente
 
     // Validar que las contraseñas coincidan
     if ($contrasena !== $confirmar_contrasena) {
@@ -122,6 +125,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="contrasena"></label>
                 <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required placeholder="Confirme su Contraseña">
+            </div>
+            <div class="form-group">
+                <label for="tipo_usuario">Tipo de usuario</label>
+                <select id="tipo_usuario" name="tipoUsuarioId" required>
+                    <option value="1">Administrador</option>
+                    <option value="0">Cliente</option>
+                </select>
             </div>
             <br>
             <div class="form-group">

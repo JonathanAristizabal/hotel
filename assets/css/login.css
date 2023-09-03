@@ -63,7 +63,7 @@ section form li :hover {
 #formulario {
     background-color: hsl(210, 29%, 29%);
     /* Color de fondo */
-    padding: 50px 0px 50px 0px;
+    padding: 25px 0px 35px 0px;
     border-radius: 10px;
     /* Bordes redondeados */
     text-align: center;

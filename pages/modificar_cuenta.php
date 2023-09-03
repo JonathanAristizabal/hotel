@@ -20,7 +20,6 @@ if (isset($_GET['documento'])) {
         $pais = $row['pais'];
         $departamento = $row['departamento'];
         $ciudad = $row['ciudad'];
-        $contrasena = $row['contrasena'];
     } else {
         echo "Usuario no encontrado.";
         exit();
@@ -40,10 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nuevo_pais = $_POST['pais'];
     $nuevo_departamento = $_POST['departamento'];
     $nueva_ciudad = $_POST['ciudad'];
-    $nueva_contrasena = $_POST['contrasena'];
 
     // Consulta SQL para actualizar los datos del usuario
-    $sqlUpdate = "UPDATE usuarios SET correo = '$nuevo_correo', nombre = '$nuevo_nombre', apellido = '$nuevo_apellido', telefono='$nuevo_telefono', pais='$nuevo_pais', departamento='$nuevo_departamento', ciudad='$nueva_ciudad', contrasena = '$nueva_contrasena' WHERE documento = '$documento'";
+    $sqlUpdate = "UPDATE usuarios SET correo = '$nuevo_correo', nombre = '$nuevo_nombre', apellido = '$nuevo_apellido', telefono='$nuevo_telefono', pais='$nuevo_pais', departamento='$nuevo_departamento', ciudad='$nueva_ciudad' WHERE documento = '$documento'";
 
     if ($conn->query($sqlUpdate) === true) {
         echo '<script>
@@ -108,9 +106,6 @@ $conn->close();
 
                     <label for="ciudad"><strong>Ciudad:</strong></label>
                     <input type="text" id="ciudad" name="ciudad" value="<?php echo $ciudad; ?>" required><br>
-
-                    <label for="contrasena"><strong>Contraseña:</strong></label>
-                    <input type="password" id="contrasena" name="contrasena" value="<?php echo $contrasena; ?>" required><br>
 
                     <button type="submit">Modificar Usuario</button>
                 </form>

@@ -93,8 +93,8 @@ select {
   width: 10%;
 }
 
-input[type="text"],
-select {
+/* Estilos para el campo de entrada de texto de la descripción */
+input[type="text#descripcion"] {
   text-align: center;
   padding: 8px 0px 8px 0px;
   margin-bottom: 10px;
@@ -103,7 +103,8 @@ select {
   font-size: 14px;
   transition: border-color 0.3s ease-in-out;
   color: #34495e;
-  width: 50%;
+  width: 85%; /* Cambiamos el ancho al 80% para permitir descripciones más largas */
+  resize: vertical; /* Permite redimensionar solo verticalmente */
 }
 
 input[type="number"],

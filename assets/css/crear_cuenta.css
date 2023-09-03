@@ -15,8 +15,6 @@ header {
 }
 
 nav ul {
-    list-style: none;
-    display: inline-block;
     margin: 0;
     padding: 10px 0px 15px 0px;
 }
@@ -143,12 +141,38 @@ footer p {
 }
 
 .ul-pie {
+    text-align: center;
     font-size: 14px;
-    text-decoration: underline;
+    text-decoration: none;
     color: #fff;
+}
+
+.ul-pie {
+    color: #5c5c5c;
 }
 
 /* Centrar el Texto del Placeholder */
 .form-group input::placeholder {
     text-align: center;
 }
+
+/* Estilos para la Lista Desplegable */
+.form-group select {
+    text-align: center;
+    width: 75%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff; /* Cambia el fondo de la lista desplegable */
+    color: #333; /* Cambia el color del texto seleccionado */
+    cursor: pointer;
+}
+
+/* Estilo cuando se enfoca (selecciona) la lista desplegable */
+.form-group select:focus {
+    outline: none;
+    border-color: #34495e; /* Cambia el color del borde cuando se enfoca */
+}
+
