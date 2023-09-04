@@ -99,14 +99,14 @@ form button {
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 form input[type="submit"]:hover,
 form button:hover {
-    background-color: #005b8e;
+    background-color: #4d4d4d;
 }
 
 /* Estilos para mensajes de validación */

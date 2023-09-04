@@ -16,6 +16,12 @@ header {
   align-items: center;
 }
 
+h2{
+  color: #34495e;
+  font-size: 20px;
+  padding: 0px 0px 0px 20px;
+}
+
 #logo {
   margin-left: 20px;
 }
@@ -77,8 +83,10 @@ ul.ul-encabezados a {
 }
 
 label {
+  padding: 0px 0px 0px 20px;
   font-weight: bold;
   margin-bottom: 5px;
+  color: #34495e;
 }
 
 input[type="date"],
@@ -103,7 +111,7 @@ input[type="text#descripcion"] {
   font-size: 14px;
   transition: border-color 0.3s ease-in-out;
   color: #34495e;
-  width: 85%; /* Cambiamos el ancho al 80% para permitir descripciones más largas */
+  width: 80%; /* Cambiamos el ancho al 80% para permitir descripciones más largas */
   resize: vertical; /* Permite redimensionar solo verticalmente */
 }
 
@@ -120,7 +128,9 @@ select {
   width: 15%;
 }
 
+
 button[type="submit"] {
+  margin: 20px;
   background-color: #34495e;
   color: white;
   border: none;

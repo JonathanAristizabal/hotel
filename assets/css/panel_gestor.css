@@ -46,6 +46,32 @@ nav ul li a {
   color: #ffffff;
 }
 
+.boton_editar_productos {
+  background-color: #34495e;
+  color: #ffffff;
+  padding: 5px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.boton_eliminar_productos {
+  background-color: #34495e;
+  color: #ffffff;
+  padding: 5px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.boton_editar_productos:hover {
+  background-color: #555;
+  
+}
+
+.boton_eliminar_productos:hover {
+  background-color: #555;
+  
+}
+
 nav ul li a:hover {
   color: #969696;
 }
@@ -67,7 +93,7 @@ table th, table td {
 
 /* Estilos para los botones en las tablas */
 table button {
-  background-color: #555;
+  background-color: #34495e;
   color: white; /* Cambiamos el color del texto a blanco */
   padding: 6px 12px;
   border: none;
@@ -77,16 +103,18 @@ table button {
   text-decoration: none; /* Quitar la decoración de texto */
 }
 
+table button:hover {
+  background-color: #555;
+  color: white; /* Cambiamos el color del texto a blanco al pasar el cursor */
+}
+
 /* Estilos para la columna de "Descripción" en la tabla */
 table td.descripcion {
   white-space: normal;
   word-wrap: break-word;
 }
 
-table button:hover {
-  background-color: #34495e;
-  color: white; /* Cambiamos el color del texto a blanco al pasar el cursor */
-}
+
 
 /* Estilo específico para los botones en las tablas de módulos */
 .modulo table button {
@@ -119,6 +147,34 @@ nav.panel {
   position: fixed;
   height: 100%;
 }
+
+/* titulos del modulo configuracion */
+.titulos_configuracion{
+  color: #34495e;
+  font-size: 24px;
+}
+
+.parrafos_configuracion{
+  color: #34495e;
+  font-size: 20px;
+}
+
+
+/* botones del modulo configuracion */
+.guardar-configuracion-button{
+  background-color: #34495e;
+  color: #ffffff;
+  border: 1px solid;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.guardar-configuracion-button:hover{
+  background-color: #5f5f5f;
+
+}
+
 
 /* Estilos para los módulos */
 main {
@@ -192,7 +248,7 @@ footer {
 
 /* Estilo para el botón del formulario */
 .crear-button {
-  background-color: #555;
+  background-color: #34495e;
   color: #fff;
   padding: 8px 20px;
   border: none;
@@ -203,7 +259,7 @@ footer {
 }
 
 .crear-button:hover {
-  background-color: #34495e;
+  background-color: #555;
   color: #fff;
 }
 

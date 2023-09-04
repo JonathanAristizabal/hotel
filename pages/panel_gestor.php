@@ -74,11 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li class="consultar-item"><a href="#consultar" id="consultar-link">Consultar</a></li>
             <br>
             <br>
-            <li class="facturacion-item"><a href="#facturacion" id="facturacion-link">Facturación</a></li>
-            <li class="habitaciones-item"><a href="#habitaciones" id="habitaciones-link">Habitaciones</a></li>
-            <li class="huespedes-item"><a href="#huespedes" id="huespedes-link">Huéspedes</a></li>
-            <li class="pedidos-item"><a href="#pedidos" id="pedidos-link">Pedidos</a></li>
             <li class="usuarios-item"><a href="#usuarios" id="usuarios-link">Usuarios</a></li>
+            <li class="huespedes-item"><a href="#huespedes" id="huespedes-link">Huéspedes</a></li>
+            <li class="habitaciones-item"><a href="#habitaciones" id="habitaciones-link">Habitaciones</a></li>
+            <li class="pedidos-item"><a href="#pedidos" id="pedidos-link">Pedidos</a></li>
+            <li class="productos-item"><a href="#productos" id="productos-link">Productos</a></li>
+            <li class="facturacion-item"><a href="#facturacion" id="facturacion-link">Facturación</a></li>
             <br>
             <br>
             <li class="configuracion-item"><a href="#configuracion" id="configuracion-link">Configuración</a></li>
@@ -397,6 +398,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
 
+        <!-- Módulo de Productos -->
+        <section class="modulo" id="productos">
+            <div><button class="crear-button" id="btnCrearProducto">Crear Producto</button></div>
+            <br>
+            <div class="modulo-header">Productos</div>
+            <div class="modulo-content">
+                <?php
+                // Consulta SQL para obtener la lista de productos desde la base de datos
+                $sqlProductos = "SELECT * FROM productos";
+                $resultProductos = $conn->query($sqlProductos);
+
+                if ($resultProductos->num_rows > 0) {
+                    echo '<table>';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>ID</th>';
+                    echo '<th>Nombre</th>';
+                    echo '<th>Descripción</th>';
+                    echo '<th>Categoria</th>';
+                    echo '<th>Precio</th>';
+                    echo '<th>Stock</th>';
+                    echo '<th>Acciones</th>'; // Agregamos una columna para las acciones
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+
+                    while ($rowProducto = $resultProductos->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $rowProducto['id'] . '</td>';
+                        echo '<td>' . $rowProducto['nombre'] . '</td>';
+                        echo '<td>' . $rowProducto['descripcion'] . '</td>';
+                        echo '<td>' . $rowProducto['categoria'] . '</td>';
+                        echo '<td>$' . $rowProducto['precio'] . '</td>';
+                        echo '<td>' . $rowProducto['stock'] . '</td>';
+                        echo '<td>';
+                        echo '<a href="editar_producto.php?id=' . $rowProducto['id'] . '"class="boton_editar_productos">Modificar</a>'; // Enlace para editar
+                        echo '  ';
+                        echo '<a href="eliminar_producto.php?id=' . $rowProducto['id'] . '"class="boton_eliminar_productos">Eliminar</a>'; // Enlace para eliminar
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<p>No hay productos disponibles.</p>';
+                }
+                ?>
+            </div>
+        </section>
+
 
         <!-- Módulo de Usuarios -->
         <section class="modulo" id="usuarios">
@@ -454,8 +506,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="modulo" id="configuracion">
             <div class="modulo-header">Configuración</div>
             <div class="modulo-content">
-                <!-- Contenido del módulo de configuración... -->
-                <p>Contenido del módulo de configuración...</p>
+                <h2 class="titulos_configuracion">Configuración General</h2>
+                <p class="parrafos_configuracion">Personaliza la información general de tu sistema.</p>
+                <form id="configuracion-general-form" method="POST">
+                    <label for="nombre_sistema">Nombre del Sistema:</label>
+                    <input type="text" id="nombre_sistema" name="nombre_sistema" value="Mi Sistema de Gestión">
+                    <br><br>
+                    <label for="idioma">Idioma:</label>
+                    <select id="idioma" name="idioma">
+                        <option value="es">Español</option>
+                        <option value="en">Inglés</option>
+                        <option value="fr">Francés</option>
+                    </select>
+                    <br><br>
+                    <label for="zona_horaria">Zona Horaria:</label>
+                    <select id="zona_horaria" name="zona_horaria">
+                        <option value="America/New_York">América/New York</option>
+                        <option value="Europe/London">Europa/Londres</option>
+                        <option value="Asia/Tokyo">Asia/Tokio</option>
+                    </select>
+                    <br><br>
+                    <label for="modo_visual">Modo Visual:</label>
+                    <select id="modo_visual" name="modo_visual">
+                        <option value="claro">Modo Claro</option>
+                        <option value="oscuro">Modo Oscuro</option>
+                    </select>
+                    <br><br>
+                    <button type="submit" class="guardar-configuracion-button">Guardar Cambios</button>
+                </form>
+                <br>
+                <h2 class="titulos_configuracion">Notificaciones por Correo Electrónico</h2>
+                <p class="parrafos_configuracion">Configura las notificaciones por correo electrónico.</p>
+                <form id="configuracion-correo-form" method="POST">
+                    <label for="correo_notificaciones">Correo de Notificaciones:</label>
+                    <input type="email" id="correo_notificaciones" name="correo_notificaciones" placeholder="ejemplo@dominio.com">
+                    <br><br>
+                    <label for="frecuencia_notificaciones">Frecuencia de Notificaciones:</label>
+                    <select id="frecuencia_notificaciones" name="frecuencia_notificaciones">
+                        <option value="diaria">Diaria</option>
+                        <option value="semanal">Semanal</option>
+                        <option value="mensual">Mensual</option>
+                    </select>
+                    <br><br>
+                    <button type="submit" class="guardar-configuracion-button">Guardar Cambios</button>
+                </form>
+                <br>
+                <h2 class="titulos_configuracion">Seguridad</h2>
+                <p class="parrafos_configuracion">Configura las opciones de seguridad del sistema.</p>
+                <form id="configuracion-seguridad-form" method="POST">
+                    <label for="politica_contrasenas">Política de Contraseñas:</label>
+                    <input type="checkbox" id="politica_contrasenas" name="politica_contrasenas" value="activada"> Activada
+                    <br>
+                    <br>
+                    <label for="autenticacion_dos_factores">Autenticación de Dos Factores:</label>
+                    <input type="checkbox" id="autenticacion_dos_factores" name="autenticacion_dos_factores" value="activada"> Activada
+                    <br>
+                    <br>
+                    <button type="submit" class="guardar-configuracion-button">Guardar Cambios</button>
+                </form>
             </div>
         </section>
     </main>

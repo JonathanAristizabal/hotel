@@ -1,33 +1,58 @@
 <?php
-include '../conections/conection.php'; // Incluye tu archivo de conexión a la base de datos
+include '../conections/conection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $documento = $_POST['documento'];
     $descripcion = $_POST['descripcion'];
     $valor = $_POST['valor'];
+    $cantidad = $_POST['cantidad']; // Nuevo campo de cantidad de productos
 
-    // Consulta SQL para obtener el ticket y la habitación a partir del documento
-    $sql = "SELECT ticket, habitacion FROM huespedes WHERE documento = '$documento'";
-    $result = $conn->query($sql);
+    $categoria = $_POST['categoria'];
+    $producto_id = $_POST['lista-productos'];
 
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $ticket = $row['ticket'];
-        $habitacion = $row['habitacion'];
+    // Obtener el stock del producto seleccionado
+    $stock = obtenerStockProducto($producto_id);
 
-        // Consulta SQL para insertar el nuevo pedido en la tabla de pedidos
-        $sqlInsertPedido = "INSERT INTO pedidos (documento, ticket,descripcion, valor, habitacion)
-                            VALUES ('$documento', '$ticket','$descripcion', '$valor', '$habitacion')";
+    if ($stock !== false) {
+        // Consulta SQL para obtener el ticket y la habitación a partir del documento
+        $sql = "SELECT ticket, habitacion FROM huespedes WHERE documento = '$documento'";
+        $result = $conn->query($sql);
 
-        if ($conn->query($sqlInsertPedido) === true) {
-            echo '<script>
-                    alert("Pedido creado con éxito.");
-                 </script>';
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $ticket = $row['ticket'];
+            $habitacion = $row['habitacion'];
+
+            // Consulta SQL para insertar el nuevo pedido en la tabla de pedidos
+            $sqlInsertPedido = "INSERT INTO pedidos (documento, ticket, descripcion, valor, habitacion, producto_id, stock, cantidad)
+                                VALUES ('$documento', '$ticket', '$descripcion', '$valor', '$habitacion', '$producto_id', '$stock', '$cantidad')";
+
+            if ($conn->query($sqlInsertPedido) === true) {
+                echo '<script>
+                        alert("Pedido creado con éxito.");
+                     </script>';
+            } else {
+                echo "Error al crear el pedido: " . $conn->error;
+            }
         } else {
-            echo "Error al crear el pedido: " . $conn->error;
+            echo "Huésped no encontrado.";
         }
     } else {
-        echo "Huésped no encontrado.";
+        echo "Error al obtener el stock del producto.";
+    }
+}
+
+// Función para obtener el stock de un producto por su ID
+function obtenerStockProducto($producto_id) {
+    global $conn;
+    $sqlStock = "SELECT stock FROM productos WHERE id = '$producto_id'";
+    $resultStock = $conn->query($sqlStock);
+
+    if ($resultStock->num_rows == 1) {
+        $rowStock = $resultStock->fetch_assoc();
+        return $rowStock['stock'];
+    } else {
+        return false;
     }
 }
 ?>
@@ -50,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <nav>
             <ul class="ul-encabezados">
-                <li><a href="panel_gestor.php">Regresar</a></li>
+                <a href="panel_gestor.php">Regresar</a>
             </ul>
         </nav>
     </header>
@@ -59,7 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="documento">Documento y Ticket:</label>
         <select id="documento" name="documento" required>
             <?php
-            // Consulta SQL para obtener los documentos y tickets de huéspedes
             $sqlDocumentosTickets = "SELECT documento, ticket FROM huespedes";
             $resultDocumentosTickets = $conn->query($sqlDocumentosTickets);
 
@@ -72,6 +96,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
 
         <br>
+        <label for="categoria">Categoría de Producto:</label>
+        <select id="categoria" name="categoria" required>
+            <option value="" disabled selected>Seleccione una categoría</option>
+            <?php
+            $sqlCategorias = "SELECT DISTINCT categoria FROM productos";
+            $resultCategorias = $conn->query($sqlCategorias);
+
+            while ($rowCategoria = $resultCategorias->fetch_assoc()) {
+                echo '<option value="' . $rowCategoria['categoria'] . '">'
+                    . $rowCategoria['categoria'] . '</option>';
+            }
+            ?>
+        </select>
+
+        <br>
+        <label for="lista-productos">Productos Disponibles:</label>
+        <select id="lista-productos" name="lista-productos" required>
+            <option value="" disabled selected>Seleccione un producto</option>
+        </select>
+
+        <!-- Mostrar el stock del producto seleccionado -->
+        <p id="stock-producto"></p>
+
+        <br>
+        <!-- Nuevo campo de cantidad de productos -->
+        <label for="cantidad">Cantidad de Productos:</label>
+        <input type="number" id="cantidad" name="cantidad" required>
+
+        <br>
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
         <br>
@@ -80,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <button type="submit">Crear Pedido</button>
     </form>
+    <script src="../assets/js/crear_pedido.js"></script>
 </body>
 
 </html>

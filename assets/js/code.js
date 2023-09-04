@@ -6,6 +6,7 @@ const pedidosLink = document.getElementById("pedidos-link");
 const usuariosLink = document.getElementById("usuarios-link");
 const configuracionLink = document.getElementById("configuracion-link");
 const consultarLink = document.getElementById("consultar-link");
+const productosLink = document.getElementById("productos-link");
 
 facturacionLink.addEventListener("click", mostrarFacturacion);
 habitacionesLink.addEventListener("click", mostrarHabitaciones);
@@ -14,6 +15,7 @@ pedidosLink.addEventListener("click", mostrarPedidos);
 usuariosLink.addEventListener("click", mostrarUsuarios);
 configuracionLink.addEventListener("click", mostrarConfiguracion);
 consultarLink.addEventListener("click", mostrarConsultar);
+productosLink.addEventListener("click", mostrarProductos);
 
 function mostrarFacturacion(event) {
   event.preventDefault();
@@ -64,6 +66,14 @@ function mostrarConsultar(event) {
   moduloConsultar.style.display = "block";
 }
 
+function mostrarProductos(event) {
+  event.preventDefault();
+  ocultarModulos();
+  const moduloProductos = document.getElementById("productos");
+  moduloProductos.style.display = "block";
+}
+
+
 function ocultarModulos() {
   const modulos = document.querySelectorAll(".modulo");
   modulos.forEach((modulo) => {
@@ -77,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnCrearUsuario = document.getElementById("btnCrearUsuario");
   const btnCrearPedido = document.getElementById("btnCrearPedido");
   const btnCrearHabitacion = document.getElementById("btnCrearHabitacion");
+  const btnCrearProducto = document.getElementById("btnCrearProducto");
   if (btnCrearUsuario) {
     btnCrearUsuario.addEventListener("click", function () {
       window.location.href = "crear_cuenta.php";
@@ -92,4 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "crear_habitacion.php";
     });
   }
+
+  if (btnCrearProducto) {
+    btnCrearProducto.addEventListener("click", function () {
+      window.location.href = "crear_producto.php";
+    });
+  }  
 });

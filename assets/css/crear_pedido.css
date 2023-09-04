@@ -16,21 +16,23 @@ header {
     align-items: center;
 }
 
-nav ul li a{
+nav ul a{
+    padding: 10px;
     text-decoration: none;
     color: #ffffff;
 }
 
 /* Estilos para el título */
 h2 {
+    font-size: 20px;
     text-align: center;
-    color: #333;
+    color: #34495e;
     margin-top: 20px;
 }
 
 /* Estilos para el formulario */
 form {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
@@ -39,9 +41,10 @@ form {
 }
 
 label {
+    padding: 0px 0px 0px 0px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #34495e;
 }
 
 /* Estilos para el formulario */
@@ -72,7 +75,7 @@ button[type="submit"] {
     color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -89,12 +92,3 @@ button[type="submit"]:hover {
     border-radius: 5px;
 }
 
-.message.success {
-    background-color: #4caf50;
-    color: #fff;
-}
-
-.message.error {
-    background-color: #ff3333;
-    color: #fff;
-}

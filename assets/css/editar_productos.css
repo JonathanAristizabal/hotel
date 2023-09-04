@@ -1,0 +1,123 @@
+/* Estilos generales */
+body, header {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #34495e;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    background-color: #34495e;
+    font-size: 16px;
+    padding: 0px 0px 0px 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 140px;
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 0px 8px 0px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    color: #ffffff;
+}
+
+nav ul li a:hover {
+    color: #969696;
+}
+
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Estilos para los botones en las tablas */
+table button {
+    background-color: #555;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+table td.descripcion {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+table button:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Estilos para los botones de modificar */
+.modificar-button {
+    background-color: #555;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.modificar-button:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+
+.modulo {
+    width: 90%;
+    background-color: #f1f1f1;
+    margin: 50px;
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.modulo-header {
+    background-color: #555;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+.modulo-content {
+    padding: 10px 10px 10px 10px;
+}
