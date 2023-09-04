@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,6 +36,10 @@
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" required><?= $rowProducto['descripcion'] ?></textarea>
 
+                    <!-- Agrega la categoría debajo de la descripción -->
+                    <label for="categoria">Categoría:</label>
+                    <input type="text" id="categoria" name="categoria" value="<?= $rowProducto['categoria'] ?>" required>
+                    <br><br>
                     <label for="precio">Precio:</label>
                     <input type="number" id="precio" name="precio" value="<?= $rowProducto['precio'] ?>" step="0.01" required>
 
